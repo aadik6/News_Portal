@@ -1,0 +1,33 @@
+.adminSidebar-horizontal {
+  /* width: 100vw; */
+  height: 50px;
+  text-align: center;
+  background-color: blue;
+  color: aliceblue;
+}
+
+
+.adminSidebar{
+    background-color: blue;
+    width: 150px;
+    padding: 10px;
+    height: 100vh;
+}
+
+.adminSidebar ul {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  color: white;
+  list-style: none;
+}
+
+.adminSidebar a{
+  color: white;
+  text-decoration: none;
+
+}
+.adminSidebar li:nth-child(7){
+  cursor: pointer;
+}
+

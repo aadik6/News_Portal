@@ -1,0 +1,34 @@
+/* homePage.css */
+
+.HomePage-parent {
+    margin: 20px; /* Adjust margin as needed */
+  }
+  
+  .parent-hero {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-gap: 20px; /* Adjust gap as needed */
+  }
+  
+  .hero {
+    height: 300px; /* Adjust height as needed */
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .hero-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.7); /* Adjust background color and opacity */
+    padding: 10px;
+    color: #fff;
+  }
+  
+  .hero-content h4 {
+    margin: 0;
+  }
+  

@@ -1,0 +1,71 @@
+.data-table-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.search-in {
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.searching {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.search-in {
+  width: unset;
+  margin: 0;
+}
+
+.data-table-btn button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  margin-left: 5px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.data-table-btn button:disabled {
+  background-color: #895252;
+  cursor: not-allowed;
+}
+
+.data-table-btn button:hover:not(:disabled) {
+  background-color: #45a049;
+}
+
+.data-table-btn span {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  margin-left: 10px;
+}
+
+.data-table-btn strong {
+  margin: 0 5px;
+}
+
+.data-table-btn button svg {
+  width: 16px;
+  height: 16px;
+}
+
+.data-table{
+    border-collapse: collapse;
+}
+
+.data-table th, .data-table td{
+    border: 1px solid;
+    
+}

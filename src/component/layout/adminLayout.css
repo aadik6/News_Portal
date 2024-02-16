@@ -1,0 +1,21 @@
+.adminLayout{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.verticle{
+  color: white;
+}
+
+.adminBody{
+    display: flex;
+}
+
+.Admin-childrenContet{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+}

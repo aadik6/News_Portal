@@ -1,0 +1,28 @@
+body{
+    margin: 0px;
+}
+.parent-nav{
+   background-color: black;
+   margin: 0px;
+   color: white;
+   position: static;
+}
+
+.navbar{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.nav-items ul{
+    display: flex;
+}
+
+.nav-items ul{
+    list-style: none;
+    gap: 20px; 
+}
+
+.nav-items ul li{
+    cursor: pointer;   
+}

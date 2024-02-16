@@ -1,0 +1,56 @@
+/* suggestion.css */
+
+.suggestion-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .suggestion-container h2 {
+    margin-top: 0;
+  }
+  
+  .suggestion-container p {
+    margin-bottom: 10px;
+  }
+  
+  .suggestion-container form {
+    display: grid;
+    gap: 10px;
+  }
+  
+  .suggestion-container label {
+    font-weight: bold;
+  }
+  
+  .suggestion-container input,
+  .suggestion-container textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+
+  .suggestion-container textarea{
+    resize: none;
+  }
+  
+  .suggestion-container button[type="submit"],
+  .suggestion-container button[type="button"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
+  .suggestion-container button[type="submit"]:hover,
+  .suggestion-container button[type="button"]:hover {
+    background-color: #0056b3;
+  }
+  

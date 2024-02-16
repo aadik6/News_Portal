@@ -1,0 +1,56 @@
+.breaking-container {
+  display: flex;
+  flex-direction: column;
+  padding: 0 15px;
+  overflow: hidden;
+  align-items: center;
+  justify-content: center;
+  background-color: aqua;
+  height: 30px;
+}
+
+.breaking-section {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.breaking-section .breakingLabel {
+  flex: 0 0 auto;
+}
+
+.breaking-section .breakingLabel h4 {
+  background-color: #ff0000;
+  color: #ffffff;
+  padding: 10px;
+  margin-right: 10px; /* Add margin to separate from marquee */
+}
+
+.marquee-container {
+  overflow: hidden;
+  white-space: nowrap; /* Prevent breaking news from wrapping */
+  flex-grow: 1; /* Grow to fill remaining space */
+}
+
+.marquee-content {
+  display: inline-flex; /* Ensure all children are in one row */
+  animation: marqueeAnimation 20s linear infinite;
+}
+
+.newsHeadings {
+  margin-right: 10px; /* Add spacing between news headings */
+}
+
+.marquee-content h3 {
+  margin: 0; /* Reset margin */
+}
+
+@keyframes marqueeAnimation {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}

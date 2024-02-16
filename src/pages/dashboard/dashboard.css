@@ -1,0 +1,23 @@
+/* Add styles to your parentDashboard class */
+.parentDashboard {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Style for the headings */
+.parentDashboard h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+/* Style for the paragraphs */
+.parentDashboard p {
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+/* Additional styles can be added based on your design preferences */

@@ -1,0 +1,54 @@
+.parentFooter{
+    background-color: rgb(14, 14, 223);
+    color: white;
+}
+
+.footer{
+    display: flex;
+    align-items: baseline;
+    justify-content: space-around;
+}
+
+.footerOne{
+    width: 250px;
+    padding: 10px;
+}
+
+.footerTwo{
+    padding: 10px;
+}
+
+.footerTwo ul{
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+
+}
+.footerTwo ul li{
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    /* margin-bottom: 10px; */
+}
+
+.footerTwo ul li a{
+    text-decoration: none;
+    color: aliceblue;
+}
+
+.footerThree{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+dialog{
+    border: 0px;
+    border-radius: 10px;
+    width: 500px;
+    max-width: 800px;
+}
+
+dialog::backdrop{
+    background-color: rgba(48, 43, 43, 0.384);
+}
