@@ -8,4 +8,5 @@ export default defineConfig({
 		host: '0.0.0.0',
 		port: 5175  ,
 	},
+	base: "/News_Portal/"
 })
