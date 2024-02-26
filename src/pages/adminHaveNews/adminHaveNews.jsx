@@ -4,13 +4,14 @@ import { db } from "../../firebase";
 import { collection, getDocs } from "firebase/firestore";
 import Loader from "../../component/loader/loader";
 import { DataTable } from "../../component/reactTable/reactTable";
-import "./adminHaveNews.css"
+import "./adminHaveNews.css";
 
 const AdminHaveNews = () => {
   const dialogRef = useRef();
   const [news, setNews] = useState([]);
   const [selectedNews, setSelectedNews] = useState(null);
-  const [editedFields, setEditedFields] = useState({}); 
+  const [editedFields, setEditedFields] = useState({});
+  const [initialImage, setInitialImage] = useState(null); // State to store initial image
 
   useEffect(() => {
     const haveNews = async () => {
@@ -35,6 +36,12 @@ const AdminHaveNews = () => {
   const handleChange = (e, field) => {
     // Update the editedFields state when any input field changes
     setEditedFields({ ...editedFields, [field]: e.target.value });
+  };
+
+  const handleImageChange = (e) => {
+    // Update editedFields and initialImage state when the image changes
+    setEditedFields({ ...editedFields, image: e.target.files[0] });
+    setInitialImage(URL.createObjectURL(e.target.files[0])); // Create URL for preview
   };
 
   const columns = [
@@ -62,6 +69,10 @@ const AdminHaveNews = () => {
                 description: row.original.description,
                 authorName: row.original.authorName,
               });
+              // Set initial image if available
+              if (row.original.image) {
+                setInitialImage(row.original.image);
+              }
             }}
           >
             Details
@@ -83,82 +94,88 @@ const AdminHaveNews = () => {
     <AdminLayout>
       <DataTable columns={columns} data={news} />
       <div className="haveNews">
-      <dialog ref={dialogRef}>
-        {selectedNews && (
-          <>
-            <div className="haveNews">
-              <div className="input-group">
-                <label htmlFor="heading">Suitable Heading</label>
-                <textarea
-                  name="heading"
-                  id="heading"
-                  value={editedFields.heading}
-                  onChange={(e) => handleChange(e, "heading")}
-                  cols="4"
-                  rows="4"
-                ></textarea>
-              </div>
-
-              <div className="input-group">
-                <label htmlFor="description">Description</label>
-                <textarea
-                  name="description"
-                  id="description"
-                  value={editedFields.description}
-                  onChange={(e) => handleChange(e, "description")}
-                  cols="15"
-                  rows="15"
-                ></textarea>
-              </div>
-              <div className="threeInput-group">
+        <dialog ref={dialogRef}>
+          {selectedNews && (
+            <>
+              <div className="haveNews">
                 <div className="input-group">
-                  <label htmlFor="image">Image</label>
-                  <input type="file" onChange={(e) => handleChange(e, "image")} />
-                </div>
-                <div className="input-group">
-                  <label htmlFor="category">Related Category</label>
-                  <select
-                    name="category"
-                    id="category"
-                    value={editedFields.category}
-                    onChange={(e) => handleChange(e, "category")}
-                  >
-                    <option value="technology">Technology</option>
-                    <option value="sport">Sport</option>
-                    <option value="politics">Politics</option>
-                    <option value="education">Education</option>
-                  </select>
-                </div>
-                <div className="input-group">
-                  <label htmlFor="isBreaking">Is Breaking</label>
-                  <select
-                    name="isBreaking"
-                    id="isBreaking"
-                    value={editedFields.isBreaking}
-                    onChange={(e) => handleChange(e, "isBreaking")}
-                  >
-                    <option value="true">Yes</option>
-                    <option value="false">No</option>
-                  </select>
+                  <label htmlFor="heading">Suitable Heading</label>
+                  <textarea
+                    name="heading"
+                    id="heading"
+                    value={editedFields.heading}
+                    onChange={(e) => handleChange(e, "heading")}
+                    cols="4"
+                    rows="4"
+                  ></textarea>
                 </div>
 
                 <div className="input-group">
-                  <label htmlFor="author">Your Name</label>
-                  <input
-                    type="text"
-                    id="authorName"
-                    name="authorName"
-                    value={editedFields.authorName}
-                    onChange={(e) => handleChange(e, "authorName")}
-                  ></input>
+                  <label htmlFor="description">Description</label>
+                  <textarea
+                    name="description"
+                    id="description"
+                    value={editedFields.description}
+                    onChange={(e) => handleChange(e, "description")}
+                    cols="15"
+                    rows="15"
+                  ></textarea>
                 </div>
+                <div className="threeInput-group">
+                  <div className="input-group">
+                    <label htmlFor="image">Image</label>
+                    <input type="file" onChange={handleImageChange} />
+                  {initialImage && (
+                    <div className="input-group">
+                      <label>Initial Image Preview:</label>
+                      <img src={initialImage} alt="Initial Preview" style={{ width: "100px", height: "100px" }} />
+                    </div>
+                  )}
+                  </div>
+                  <div className="input-group">
+                    <label htmlFor="category">Related Category</label>
+                    <select
+                      name="category"
+                      id="category"
+                      value={editedFields.category}
+                      onChange={(e) => handleChange(e, "category")}
+                    >
+                      <option value="technology">Technology</option>
+                      <option value="sport">Sport</option>
+                      <option value="politics">Politics</option>
+                      <option value="education">Education</option>
+                    </select>
+                  </div>
+                  <div className="input-group">
+                    <label htmlFor="isBreaking">Is Breaking</label>
+                    <select
+                      name="isBreaking"
+                      id="isBreaking"
+                      value={editedFields.isBreaking}
+                      onChange={(e) => handleChange(e, "isBreaking")}
+                    >
+                      <option value="true">Yes</option>
+                      <option value="false">No</option>
+                    </select>
+                  </div>
+
+                  <div className="input-group">
+                    <label htmlFor="author">Your Name</label>
+                    <input
+                      type="text"
+                      id="authorName"
+                      name="authorName"
+                      value={editedFields.authorName}
+                      onChange={(e) => handleChange(e, "authorName")}
+                    ></input>
+                  </div>
+                </div>
+                <button onClick={handleSubmit}>Post News</button>
+                <button onClick={() => { dialogRef.current.close() }}>close</button>
               </div>
-              <button onClick={handleSubmit}>Post News</button>
-              <button onClick={()=>{dialogRef.current.close()}}>close</button>
-            </div>
-          </>
-        )}
-      </dialog>
+            </>
+          )}
+        </dialog>
       </div>
     </AdminLayout>
   );

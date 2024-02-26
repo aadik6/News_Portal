@@ -4,6 +4,7 @@
   text-align: center;
   background-color: blue;
   color: aliceblue;
+  overflow: hidden;
 }
 
 
@@ -12,6 +13,7 @@
     width: 150px;
     padding: 10px;
     height: 100vh;
+    overflow: hidden;
 }
 
 .adminSidebar ul {

@@ -5,15 +5,15 @@ import { app } from "../../firebase";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useAuth } from "../../util/authContext";
 import AdminLayout from "../../component/layout/adminLayout";
-import '../addNews/addNews.css'
+import "../addNews/addNews.css";
 import { getSession } from "../../util/authContext";
 
 // Initialize Firebase storage
 const storage = getStorage(app);
 
 function AddNews() {
-const {displayName} = getSession();
-console.log(displayName,"name")
+  const { displayName } = getSession();
+  console.log(displayName, "name");
 
   const initialState = {
     heading: "",
@@ -21,7 +21,7 @@ console.log(displayName,"name")
     image: null, // Store image URL or reference here
     category: "",
     isBreaking: false,
-    authorName:displayName,
+    authorName: displayName,
   };
 
   const [formData, setFormData] = useState(initialState);
@@ -65,8 +65,8 @@ console.log(displayName,"name")
       // Add the updated data to Firestore
       const docRef = await addDoc(collection(db, "News"), updatedData);
       // console.log("Document written with ID: ", docRef.id);
-      setFormData(initialState)
-      alert("News posted")
+      setFormData(initialState);
+      alert("News posted");
     } catch (e) {
       console.error("Error adding document: ", e);
     }
@@ -88,7 +88,6 @@ console.log(displayName,"name")
               required
             ></textarea>
           </div>
-
           <div className="input-group">
             <label htmlFor="description">Description</label>
             <textarea
@@ -102,49 +101,43 @@ console.log(displayName,"name")
             ></textarea>
           </div>
           <div className="threeInput-group">
-          <div className="input-group">
-            <label htmlFor="image">Image</label>
-            <input type="file" onChange={handleFileChange} />
-          </div>
-          <div className="input-group">
-            <label htmlFor="category">Category</label>
-            <select
-              name="category"
-              id="category"
-              value={formData.category}
-              onChange={handlechange}
-              required
-            >
-              <option value="technology">Technology</option>
-              <option value="sport">Sport</option>
-              <option value="politics">Politics</option>
-              <option value="education">Education</option>
-            </select>
-          </div>
-          <div className="input-group">
-            <label htmlFor="isBreaking">Is Breaking</label>
-            <select
-              name="isBreaking"
-              id="isBreaking"
-              value={formData.isBreaking}
-              onChange={handlechange}
-            >
-              <option value="true">Yes</option>
-              <option value="false">No</option>
-            </select>
-          </div>
+            <div className="input-group">
+              <label htmlFor="image">Image</label>
+              <input type="file" onChange={handleFileChange} />
+            </div>
+            <div className="input-group">
+              <label htmlFor="category">Category</label>
+              <select
+                name="category"
+                id="category"
+                value={formData.category}
+                onChange={handlechange}
+                required
+              >
+                <option value="technology">Technology</option>
+                <option value="sport">Sport</option>
+                <option value="politics">Politics</option>
+                <option value="education">Education</option>
+              </select>
+            </div>
+            <div className="input-group">
+              <label htmlFor="isBreaking">Is Breaking</label>
+              <select
+                name="isBreaking"
+                id="isBreaking"
+                value={formData.isBreaking}
+                onChange={handlechange}
+              >
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+              </select>
+            </div>
 
-          <div className="input-group">
-            <label htmlFor="author">Author Name</label>
-            <input type="text" readOnly value={displayName}></input>
+            <div className="input-group">
+              <label htmlFor="author">Author Name</label>
+              <input type="text" readOnly value={displayName}></input>
+            </div>
           </div>
-
-          </div>
-         
-
-          
-
-         
 
           <button onClick={handlePostNews}>Post News</button>
         </div>
