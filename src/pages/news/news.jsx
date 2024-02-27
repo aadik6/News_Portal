@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNewsContext } from "../../context/newsFetcher";
 import { DataTable } from "../../component/reactTable/reactTable";
 import AdminLayout from "../../component/layout/adminLayout";
@@ -7,6 +7,7 @@ import Loader from "../../component/loader/loader";
 function News() {
   const { newsData, loading } = useNewsContext();
   const [news, setNews] = useState([]);
+  const dialogRef = useRef();
 
   useEffect(() => {
     if (!loading && newsData.length > 0) {
@@ -47,6 +48,7 @@ function News() {
         <>
           <button
             onClick={() => {
+              dialogRef.current.showModal();
               console.log("Id", row.original.id);
             }}
           >
@@ -69,6 +71,9 @@ function News() {
     <>
       <AdminLayout>
         <DataTable columns={columns} data={news} />
+        <dialog ref={dialogRef}>
+          <h1>op</h1>
+        </dialog>
       </AdminLayout>
     </>
   );

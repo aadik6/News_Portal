@@ -25,13 +25,13 @@ function AdminSidebarVerticle() {
             <Link to="/addNews">Add News</Link>
           </li>
           <li>
-            <Link to="/addUser">Add User</Link>
-          </li>
-          <li>
             <Link to="/adminHaveNews">Have News</Link>
           </li>
           <li>
             <Link to="/traffic">Traffic</Link>
+          </li>
+          <li>
+            <Link to="/addUser">Add User</Link>
           </li>
           <li onClick={logout}>Logout</li>
         </ul>
