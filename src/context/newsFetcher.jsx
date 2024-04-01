@@ -26,7 +26,7 @@ function NewsFetcherProvider({ children }) {
         setNewsData(data);
       } catch (error) {
         console.error("Error fetching news data:", error);
-        setError(error);
+        // Handle error
       } finally {
         setLoading(false);
       }
@@ -35,9 +35,14 @@ function NewsFetcherProvider({ children }) {
     fetchData();
   }, []);
 
-  // Provide the newsData and loading state to the children components
+  // Function to update news data
+  const updatedNews = (updatedData) => {
+    setNewsData(updatedData);
+  };
+
+  // Provide the newsData, loading state, and updatedNews function to the children components
   return (
-    <NewsContext.Provider value={{ newsData, loading }}>
+    <NewsContext.Provider value={{ newsData, loading, updatedNews }}>
       {children}
     </NewsContext.Provider>
   );

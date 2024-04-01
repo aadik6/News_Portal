@@ -6,7 +6,7 @@ import "../homePage/homePage.css"
 
 function HomePage() {
   const { newsData, loading } = useNewsContext();
-  // console.log(newsData[1].category,"op")
+  console.log(newsData)
   if (loading) {
     return (
       <Layout>

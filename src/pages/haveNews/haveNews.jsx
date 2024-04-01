@@ -4,7 +4,7 @@ import { db } from "../../firebase";
 import { app } from "../../firebase";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import Layout from "../../component/layout/layout";
-// import '../alertNews/alertNews.css';
+import "./haveNews.css"
 
 // Initialize Firebase storage
 const storage = getStorage(app);

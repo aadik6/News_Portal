@@ -8,16 +8,16 @@ import {
   getFilteredRowModel,
   createColumnHelper,
 } from "@tanstack/react-table";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import {
-//   faBackward,
-//   faCaretLeft,
-//   faCaretRight,
-//   faForward,
-//   faMagnifyingGlass,
-// } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faBackward,
+  faCaretLeft,
+  faCaretRight,
+  faForward,
+  faMagnifyingGlass,
+} from "@fortawesome/free-solid-svg-icons";
 
-import "../reactTable/reactTable.css"
+import "../reactTable/reactTable.css";
 
 export function DataTable({ columns, data }) {
   const [sorting, setSorting] = useState([]);
@@ -42,8 +42,22 @@ export function DataTable({ columns, data }) {
   return (
     <>
       <div className="tablaa">
+        <div className="oktable">
+          <input
+            className="search-in"
+            type="text"
+            value={filtering}
+            onChange={(e) => setFiltering(e.target.value)}
+            placeholder="🔍  Search "
+          />
+        </div>
         <div className="got t-bg">
-          <table className="data-table">
+          <table
+            border={1}
+            // className={ok ? `${ok} data-table` : "data-table"}
+
+            className="data-table `${ok}`"
+          >
             <thead>
               {table.getHeaderGroups().map((headerGroup) => (
                 <tr key={headerGroup.id}>
@@ -51,7 +65,8 @@ export function DataTable({ columns, data }) {
                     <th
                       key={header.id}
                       className={header.column.className}
-                      onClick={header.column.getToggleSortingHandler()}>
+                      onClick={header.column.getToggleSortingHandler()}
+                    >
                       {header.isPlaceholder ? null : (
                         <div>
                           {flexRender(
@@ -95,44 +110,51 @@ export function DataTable({ columns, data }) {
           </table>
         </div>
       </div>
-      <div className="searching"></div>
-      <div className="data-table-btn">
-        <input
-          type="text"
-          value={filtering}
-          onChange={(e) => setFiltering(e.target.value)}
-          placeholder="🔍  Search "
-          className="search-in"
-        />
-        <button
-          disabled={!table.getCanPreviousPage()}
-          onClick={() => table.setPageIndex(0)}>
-          {/* <FontAwesomeIcon icon={faBackward} /> */}
-        </button>
-        <button
-          disabled={!table.getCanPreviousPage()}
-          onClick={() => table.previousPage()}>
-          {/* <FontAwesomeIcon icon={faCaretLeft} /> */}
-        </button>
-        <button
-          disabled={!table.getCanNextPage()}
-          onClick={() => table.nextPage()}>
-          {/* <FontAwesomeIcon icon={faCaretRight} /> */}
-        </button>
+      <div className="pageController">
+        <div className="searching">
+          {/* <input
+            type="text"
+            value={filtering}
+            onChange={(e) => setFiltering(e.target.value)}
+            placeholder="🔍  Search "
+            className="search-in"
+          /> */}
+        </div>
+        <div className="data-table-btn">
+          <button
+            disabled={!table.getCanPreviousPage()}
+            onClick={() => table.setPageIndex(0)}
+          >
+            <FontAwesomeIcon icon={faBackward} />
+          </button>
+          <button
+            disabled={!table.getCanPreviousPage()}
+            onClick={() => table.previousPage()}
+          >
+            <FontAwesomeIcon icon={faCaretLeft} />
+          </button>
+          <button
+            disabled={!table.getCanNextPage()}
+            onClick={() => table.nextPage()}
+          >
+            <FontAwesomeIcon icon={faCaretRight} />
+          </button>
 
-        <button
-          disabled={!table.getCanNextPage()}
-          onClick={() => table.setPageIndex(table.getPageCount() - 1)}>
-          {/* <FontAwesomeIcon icon={faForward} /> */}
-        </button>
-{/* 
-        <span>
-          <div>Page</div>
-          <strong>
-            {table.getState().pagination.pageIndex + 1} of{" "}
-            {table.getPageCount()}
-          </strong>
-        </span> */}
+          <button
+            disabled={!table.getCanNextPage()}
+            onClick={() => table.setPageIndex(table.getPageCount() - 1)}
+          >
+            <FontAwesomeIcon icon={faForward} />
+          </button>
+
+          <span>
+            <div>Page</div>
+            <strong>
+              {table.getState().pagination.pageIndex + 1} of{" "}
+              {table.getPageCount()}
+            </strong>
+          </span>
+        </div>
 
         {/* <span>
           Go to page:

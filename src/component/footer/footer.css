@@ -45,8 +45,8 @@
 dialog{
     border: 0px;
     border-radius: 10px;
-    width: 500px;
-    max-width: 800px;
+    /* min-width: 400px; */
+    max-width: 1000px;
 }
 
 dialog::backdrop{

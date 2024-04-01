@@ -1,0 +1,8 @@
+.pageName{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 5rem;
+    background-color: blue;
+    color: aliceblue;
+}

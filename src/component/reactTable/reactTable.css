@@ -1,3 +1,51 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  /* box-sizing: border-box; */
+  font-family: "Poppins", sans-serif;
+  /* scrollbar-width: none; */
+}
+
+
+a {
+  text-decoration: none;
+  color: unset;
+}
+
+a:visited {
+  color: unset;
+}
+
+
+.container.sidebar-open {
+  grid-template-columns: 270px 1.4fr;
+}
+
+.m-header {
+  grid-area: m-header;
+}
+
+.m-siderbar {
+  grid-area: m-siderbar;
+}
+
+
+.add-data {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+
+.hoverrr:hover {
+  background: rgba(0, 0, 0, 0.514);
+  color: #fff;
+  cursor: grab;
+  font-weight: 600;
+}
+
 .data-table-btn {
   display: flex;
   align-items: center;
@@ -21,8 +69,11 @@
 }
 
 .search-in {
-  width: unset;
   margin: 0;
+}
+
+.oktable input[type="text"]{
+  width: 250px;
 }
 
 .data-table-btn button {
@@ -61,11 +112,247 @@
   height: 16px;
 }
 
-.data-table{
-    border-collapse: collapse;
+.dateSelect {
+  display: flex;
+  gap: 20px;
 }
 
-.data-table th, .data-table td{
-    border: 1px solid;
-    
+.dateSel {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.dateSel input {
+  margin: 0;
+  width: unset;
+}
+
+.dateSel label {
+  margin: 0;
+}
+
+/* dialog {
+  max-width: 1169px;
+  width: 100%;
+} */
+
+dialog::backdrop {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.data-table tr:hover {
+  background-color: rgba(57, 57, 57, 0.784);
+  color: #fff;
+  cursor: pointer;
+}
+
+.data-table td button {
+  cursor: pointer;
+}
+
+.data-table td button:active {
+  transform: scale(0.9);
+}
+
+
+.data-table {
+  border-collapse: collapse;
+  margin-top: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background: #fff;
+  border-radius: 8px;
+  table-layout: fixed;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.data-table th,
+.data-table td {
+  border: 1px solid #ecf0f1;
+  padding: 5px 12px;
+  text-align: left;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.data-table th {
+  background-color: #3498db;
+  color: #fff;
+  text-align: center;
+}
+
+.sn-column {
+  width: 50px;
+}
+
+.table_delete,
+.table_edit {
+  cursor: pointer;
+  padding: 10px 15px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+.data-table button {
+  color: #fff;
+  border: none;
+  width: 80px;
+  margin-right: 5px;
+  height: 35px;
+  /* font-size: 1.3rem; */
+}
+
+.data-table button:nth-child(1) {
+  background-color: rgba(0, 0, 255, 0.733);
+}
+
+.data-table button:nth-child(2) {
+  background-color: #23ca14c9;
+}
+.data-table button:nth-child(3) {
+  background-color: rgba(255, 0, 0, 0.801);
+}
+
+dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 1.2em;
+  background: none;
+  border: none;
+  color: #2c3e50;
+}
+
+.data-table th:nth-child(n + 9):nth-child(-n + 11) {
+  max-width: 200px;
+}
+
+/* .data-table td:last-child{
+  display: flex;
+} */
+
+#got h1 {
+  display: grid;
+  place-content: center;
+}
+
+/* .got {
+  max-width: 1800px;
+  width: 100%;
+  border-radius: 20px;
+  min-height: 675px;
+} */
+
+.tablaa {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.oktable {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  max-width: 1800px;
+  border-radius: 20px;
+}
+.got{
+ overflow: auto;
+}
+
+.got{
+  -ms-overflow-style: none; 
+  scrollbar-width: none;  
+}
+
+/* chrome and safari */
+.got::-webkit-scrollbar {
+display: none;
+}
+
+@media (max-width: 1800px) {
+  .tablaa {
+    align-items: stretch;
+  }
+}
+
+.rolewa {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.tableSpan {
+  text-transform: uppercase;
+}
+
+.compLink {
+  color: rgb(51, 51, 213);
+  font-weight: bold;
+}
+
+.imageDialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: transparent;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  width: 800px;
+  height: 600px;
+  overflow: hidden;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.imageDialog button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #830f28;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.imageDialog button:hover {
+  background-color: #0056b3;
+}
+
+.data-table td,
+.data-table th {
+  text-transform: capitalize;
+}
+
+
+
+td a{
+  text-transform: lowercase;
+}
+
+.data-table{
+  user-select: none;
 }

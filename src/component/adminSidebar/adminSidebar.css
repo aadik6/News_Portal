@@ -17,19 +17,34 @@
 }
 
 .adminSidebar ul {
+  margin-top:40px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
   color: white;
+  gap: 20px;
   list-style: none;
+  align-items: baseline;
+}
+
+.administrator{
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
 }
 
 .adminSidebar a{
   color: white;
   text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 
 }
-.adminSidebar li:nth-child(7){
+.adminSidebar li:nth-child(4){
+  cursor: pointer;
+}
+.adminSidebar li:nth-child(5){
   cursor: pointer;
 }
 

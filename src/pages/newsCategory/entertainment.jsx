@@ -7,7 +7,7 @@ function EntertainmentPage() {
   const { newsData, loading } = useNewsContext();
 
   // Filter news where category is 'technology'
-  const technologyNews = newsData.filter(newsItem => newsItem.category === 'sport');
+  const entertainmentNews = newsData.filter(newsItem => newsItem.category === 'sport');
 
   if(loading){
     return(
@@ -20,9 +20,10 @@ function EntertainmentPage() {
 
   return (
     <Layout>
+      <div className="pageName">Entertainment</div>
     <div>
       {/* Render technology news here */}
-      {technologyNews.map((newsItem, index) => (
+      {entertainmentNews.map((newsItem, index) => (
         <div key={index}>
           <h3>{newsItem.heading}</h3>
           <p>{newsItem.description}</p>

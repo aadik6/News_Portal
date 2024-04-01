@@ -5,9 +5,9 @@ import AdminSidebarVerticle from "../adminSidebar/adminSidebarVerticle";
 function AdminLayout({ children }) {
   return (
     <div className="adminLayout">
-      <div className="horizontal">
+      {/* <div className="horizontal">
         <AdminSidebarHorizontal />
-      </div>
+      </div> */}
       <div className="adminBody">
         <div className="verticle">
           <AdminSidebarVerticle />

@@ -2,10 +2,11 @@ body{
     margin: 0px;
 }
 .parent-nav{
-   background-color: black;
+   background-color:#6096B4;
    margin: 0px;
    color: white;
    position: static;
+   height: 50px;
 }
 
 .navbar{
@@ -23,6 +24,8 @@ body{
     gap: 20px; 
 }
 
-.nav-items ul li{
+.nav-items ul li a{
+    text-decoration: none;
+    color: white;
     cursor: pointer;   
 }

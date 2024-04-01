@@ -18,6 +18,10 @@ import News from "./pages/news/news";
 import AdminHaveNews from "./pages/adminHaveNews/adminHaveNews";
 import Technology from "./pages/newsCategory/technology";
 import Education from "./pages/newsCategory/education";
+import PoliticsPage from "./pages/newsCategory/politics";
+import AdminContact from "./pages/adminContact/adminContact";
+import AdminSuggestion from "./pages/adminSuggestion/adminSuggestion";
+import "./App.css"
 
 function App() {
     return (
@@ -32,6 +36,7 @@ function App() {
                     <Route path="/entertainment" element={<EntertainmentPage />} />
                     <Route path="/sport" element={<Sport />} />
                     <Route path="/education" element={<Education/>}/>
+                    <Route path="/politics" element={<PoliticsPage/>}/> 
                     <Route path="" element={<ProtectedRoute />}>
                         <Route path="/dashboard" element={<Dashboard/>}/>
                         <Route path="/addNews" element={<AddNews />} />
@@ -39,6 +44,8 @@ function App() {
                         <Route path="/traffic" element={<Traffic/>}/>
                         <Route path="/adminNews" element={<News/>}/>
                         <Route path="/adminHaveNews" element={<AdminHaveNews/>}/>
+                        <Route path="/adminContact" element={<AdminContact/>}/>
+                        <Route path="/adminSuggestion" element={<AdminSuggestion/>}/>
                     </Route>
                     <Route path="/*" element={<NoPage/>}/>
                     <Route path="/suggestion" element={<Suggestion/>}/>

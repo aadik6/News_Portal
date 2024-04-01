@@ -1,43 +1,50 @@
-.addNews{
-    display: flex;
-    flex-direction: column;
-    width:calc(100vw - 220px);
-    gap:10px;
-}
-    .input-group{
-        display: flex;
-        flex-direction: column;
-    gap: 4px;
+.addNews {
+  display: flex;
+  flex-direction: column;
+  width: calc(100vw - 220px);
+  gap: 10px;
 }
 
-.input-group textarea{
-    resize: none;
+.updateNews{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 60vw;
+}
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
-.threeInput-group{
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-    align-items: center;
-    flex-wrap: wrap;
+.input-group textarea {
+  resize: none;
 }
 
-.addNews button{
-    height: 40px;
-    background-color: blue;
-    border: 0px;
-    border-radius: 5px;
-    color: white;
-    cursor: pointer;
+.threeInput-group {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
-.haveNews button{
-    height: 40px;
-    width: 100%;
-    background-color: blue;
-    border: 0px;
-    border-radius: 5px;
-    color: white;
-    margin-top: 10px;
-    cursor: pointer;
+.addNews button {
+  height: 40px;
+  background-color: blue;
+  border: 0px;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+}
+
+.haveNews button {
+  height: 40px;
+  width: 100%;
+  background-color: blue;
+  border: 0px;
+  border-radius: 5px;
+  color: white;
+  margin-top: 10px;
+  cursor: pointer;
 }

@@ -1,5 +1,6 @@
 .content {
-  padding: 15px;
+  padding: 5px 0;
+  height: calc(100vh - 80px);
 }
 .nav{
     position: sticky;

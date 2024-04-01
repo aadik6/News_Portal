@@ -20,6 +20,7 @@ function Technology() {
 
   return (
     <Layout>
+      <div className="pageName">Technology</div>
     <div>
       {/* Render technology news here */}
       {technologyNews.map((newsItem, index) => (

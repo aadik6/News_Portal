@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import AdminLayout from "../../component/layout/adminLayout";
 import { db } from "../../firebase";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, addDoc, deleteDoc, doc } from "firebase/firestore";
 import Loader from "../../component/loader/loader";
 import { DataTable } from "../../component/reactTable/reactTable";
 import "./adminHaveNews.css";
@@ -27,10 +27,39 @@ const AdminHaveNews = () => {
     haveNews();
   }, []);
 
-  const handleSubmit = () => {
-    // Here you can handle the editedFields state and perform necessary actions
-    console.log("Edited fields:", editedFields);
-    dialogRef.current.close();
+  const handleSubmit = async () => {
+    try {
+      // Construct the news object with edited fields
+      const editedNews = {
+        heading: editedFields.heading,
+        category: editedFields.category,
+        image: editedFields.image,
+        description: editedFields.description,
+        authorName: editedFields.authorName,
+        isBreaking: editedFields.isBreaking === 'true', // Convert string to boolean
+      };
+  
+      // Add the edited news to the "News" collection in Firebase
+      await addDoc(collection(db, "News"), editedNews);
+  
+      // Optionally, you can update the state or perform any other actions upon successful upload
+  
+      // Close the dialog
+      dialogRef.current.close();
+    } catch (error) {
+      console.error("Error adding news: ", error);
+      // Handle error scenarios, if any
+    }
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      await deleteDoc(doc(db, "Alert", id));
+      setNews(news.filter((item) => item.id !== id));
+    } catch (error) {
+      console.error("Error deleting news: ", error);
+      // Handle error scenarios, if any
+    }
   };
 
   const handleChange = (e, field) => {
@@ -77,6 +106,7 @@ const AdminHaveNews = () => {
           >
             Details
           </button>
+          <button onClick={() => handleDelete(row.original.id)}>Delete</button>
         </>
       ),
     },

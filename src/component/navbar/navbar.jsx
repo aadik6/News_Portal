@@ -1,6 +1,7 @@
 import React from 'react'
 import '../navbar/navbar.css'
 import Breaking from '../breakingNews/breaking'
+import { NavLink } from 'react-router-dom'
 
 function Navbar() {
   return (
@@ -10,13 +11,12 @@ function Navbar() {
                 <div className="log">Logo</div>
                 <div className="nav-items">
                     <ul>
-                        <li>Trending</li>
-                        <li>Home</li>
-                        <li>Entertainment</li>
-                        <li>Sport</li>
-                        <li>Politics</li>
-                        <li>Culture</li>
-                        <li>Search</li>
+                        <li> <NavLink to="/">Home</NavLink></li>
+                        <li> <NavLink to="/technology">Technology</NavLink></li>
+                        <li> <NavLink to="/entertainment">Entertainment</NavLink></li>
+                        <li> <NavLink to="/politics">Politics</NavLink></li>
+                        <li> <NavLink to="/education">Education</NavLink></li>
+                        <li> <NavLink to="/sport">Sport</NavLink></li>
                     </ul>
                 </div>
             </div>
