@@ -1,12 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import Layout from "../../component/layout/layout";
 import { useNewsContext } from "../../context/newsFetcher";
 import Loader from "../../component/loader/loader";
-import "../homePage/homePage.css"
+import Article from "../../component/article/article";
+import "../homePage/homePage.css";
 
 function HomePage() {
   const { newsData, loading } = useNewsContext();
-  console.log(newsData)
+  const [selectedArticle, setSelectedArticle] = useState(null); // State to track the selected article
+
   if (loading) {
     return (
       <Layout>
@@ -17,26 +19,39 @@ function HomePage() {
     );
   }
 
+  // Function to handle click on news item
+  const handleNewsItemClick = (index) => {
+    setSelectedArticle(newsData[index]);
+  };
+
   return (
     <Layout>
       <div className="HomePage-parent">
-        <div className="parent-hero">
-          {newsData.slice(0, 4).map((newsItem, index) => (
-            <div
-              className="hero"
-              key={index}
-              style={{ backgroundImage: `url(${newsItem.image})` }}
-            >
-              <div className="hero-content">
-                <h4>{newsItem.heading}</h4>
+        {selectedArticle ? ( // If an article is selected, render the Article component
+          <Article
+            article={selectedArticle}
+            onClose={() => setSelectedArticle(null)} // Pass a function to close the article
+          />
+        ) : (
+          <div className="parent-hero">
+            {newsData.slice(0, 4).map((newsItem, index) => (
+              <div
+                className="hero"
+                key={index}
+                style={{ background: `url(${newsItem.image})` }}
+                onClick={() => handleNewsItemClick(index)}
+              >
+                <div className="hero-content">
+                  <h4>{newsItem.heading}</h4>
+                  <h4>{newsItem.content}</h4>
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
     </Layout>
   );
-  
 }
 
 export default HomePage;
