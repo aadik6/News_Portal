@@ -31,19 +31,19 @@ function AdminSidebarVertical() {
       <div className="adminSidebar">
         <ul>
           <li>
-            <NavLink to="/dashboard">
+            <NavLink to="/News_Portal/dashboard">
               <FontAwesomeIcon icon={faHouseUser} />
               <h4>Dashboard</h4>
             </NavLink>
           </li>
           <li>
-            <NavLink to="/adminNews">
+            <NavLink to="/News_Portal/adminNews">
               <FontAwesomeIcon icon={faNewspaper} />
               <h4>News</h4>
             </NavLink>
           </li>
           <li>
-            <NavLink to="/addNews">
+            <NavLink to="/News_Portal/addNews">
               <FontAwesomeIcon icon={faPenToSquare} />
               <h4>Add News</h4>
             </NavLink>
@@ -56,19 +56,19 @@ function AdminSidebarVertical() {
             {showAdministratorMenu && (
               <ul className="nested">
                 <li>
-                  <NavLink to="/addUser">Add User</NavLink>
+                  <NavLink to="/News_Portal/addUser">Add User</NavLink>
                 </li>
                 <li>
-                  <NavLink to="/adminHaveNews">Have News</NavLink>
+                  <NavLink to="/News_Portal/adminHaveNews">Have News</NavLink>
                 </li>
                 <li>
-                  <NavLink to="/adminContact">Contacts</NavLink>
+                  <NavLink to="/News_Portal/adminContact">Contacts</NavLink>
                 </li>
                 <li>
-                  <NavLink to="/adminSuggestion">Suggestions</NavLink>
+                  <NavLink to="/News_Portal/adminSuggestion">Suggestions</NavLink>
                 </li>
                 <li>
-                  <NavLink to="/traffic">Traffic</NavLink>
+                  <NavLink to="/News_Portal/traffic">Traffic</NavLink>
                 </li>
               </ul>
             )}

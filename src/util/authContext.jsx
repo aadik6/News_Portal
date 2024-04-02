@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }) => {
             console.log(result.user.uid,"nama")
             alert("user logged in");
             console.log(auth.currentUser.emailVerified, "op");
-            navigate('/dashboard');
+            navigate('/News_Portal/dashboard');
             setSession(result)
         } catch (error) {
             console.error(error.code, "errorCode");

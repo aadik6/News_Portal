@@ -13,7 +13,7 @@ const ProtectedRoute = () => {
       <Outlet />
     </div>
   ) : (
-    <Navigate to="/admin" />
+    <Navigate to="/News_Portal/admin" />
   );
 };
 
