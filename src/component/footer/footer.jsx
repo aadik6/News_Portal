@@ -36,7 +36,7 @@ function Footer() {
                             <li>Advertisement</li>
                             <li onClick={()=>{suggestionDialogRef.current.showModal()}}>Suggestion</li>
                             <li>
-                                <Link to="/haveNews">Have News</Link>
+                                <Link to="/News_Portal/haveNews">Have News</Link>
                             </li>
                             <li onClick={()=>{contactDialogRef.current.showModal()}}>Contact</li>
                             <li onClick={handleCareer}>Career</li>
