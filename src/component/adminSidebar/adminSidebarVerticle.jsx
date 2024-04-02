@@ -23,7 +23,7 @@ function AdminSidebarVertical() {
   function logout() {
     localStorage.clear();
     alert("You are Logged out");
-    navigate("/admin");
+    navigate("/News_Portal");
   }
 
   return (
