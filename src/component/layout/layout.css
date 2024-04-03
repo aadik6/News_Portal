@@ -1,9 +1,9 @@
 .content {
   padding: 5px 0;
- min-height: calc(100vh - 80px);
+  min-height: calc(100vh - 260px);
 }
-.nav{
-    position: sticky;
-    z-index: +999;
-    top: 0px;
+.nav {
+  position: sticky;
+  z-index: +999;
+  top: 0px;
 }
