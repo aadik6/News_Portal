@@ -1,7 +1,8 @@
 /* suggestion.css */
 
 .suggestion-container {
-    max-width: 400px;
+    max-width: 500px;
+    min-width: 300px;
     margin: 0 auto;
     padding: 20px;
     background-color: #f9f9f9;

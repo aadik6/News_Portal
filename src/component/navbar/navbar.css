@@ -3,6 +3,8 @@ body {
 }
 
 .parent-nav {
+    display: flex;
+    align-items: center;
     background-color: #6096B4;
     margin: 0px;
     color: white;
@@ -15,6 +17,7 @@ body {
     align-items: center;
     justify-content: space-between; 
     padding: 0 20px;
+    width: 100%;
 }
 
 .nav-items ul {
