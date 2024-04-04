@@ -21,6 +21,7 @@ import Education from "./pages/newsCategory/education";
 import PoliticsPage from "./pages/newsCategory/politics";
 import AdminContact from "./pages/adminContact/adminContact";
 import AdminSuggestion from "./pages/adminSuggestion/adminSuggestion";
+import ResetPassword from "./component/resetPassword/resetPassword";
 import "./App.css"
 
 function App() {
@@ -49,6 +50,7 @@ function App() {
                     </Route>
                     <Route path="/*" element={<NoPage/>}/>
                     <Route path="/News_Portal/suggestion" element={<Suggestion/>}/>
+                    <Route path="/News_Portal/reset" element={<ResetPassword/>}/>
                     
                 </Routes>
             </AuthProvider>

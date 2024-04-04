@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { app } from '../../firebase';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../util/authContext';
-import '../login/login.css'
+import '../login/login.css';
 
 function LoginPage() {
     const navigate = useNavigate();
-    const { login } = useAuth();
+    const { login, loginError } = useAuth();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
 
     const loginUser = () => {
         try {
@@ -19,7 +20,7 @@ function LoginPage() {
     };
 
     return (
-        <>
+        <div className='login'>
             <div className="loginPage">
                 <input
                     type="email"
@@ -28,13 +29,27 @@ function LoginPage() {
                     onChange={(e) => setEmail(e.target.value)}
                 />
                 <input
-                    type="password"
+                    type={showPassword ? "text" : "password"}
                     value={password}
+                    placeholder='Password'
                     onChange={(e) => setPassword(e.target.value)}
                 />
+                <div className="kaka">
+                    <label>
+                        <input 
+                            type='checkbox'
+                            checked={showPassword}
+                            onChange={() => setShowPassword(!showPassword)}
+                        />
+                        <span>show_password</span>
+                    </label>
+                    <Link to="/News_Portal/reset">Forgot?</Link>
+                </div>
                 <button onClick={loginUser}>Login</button>
+                {loginError &&
+                <p>{loginError}</p>}
             </div>
-        </>
+        </div>
     );
 }
 

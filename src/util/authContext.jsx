@@ -5,6 +5,7 @@ import { auth } from "../firebase";
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
+    const [loginError, setLoginError] = useState(null)
 
     const login = async (email, password, navigate) => {
         try {
@@ -17,6 +18,7 @@ export const AuthProvider = ({ children }) => {
         } catch (error) {
             console.error(error.code, "errorCode");
             console.error(error.message, "message");
+            setLoginError(error.message)
         }
     };
 
@@ -26,7 +28,7 @@ export const AuthProvider = ({ children }) => {
 
 
     return (
-        <AuthContext.Provider value={{ login, logout }}>
+        <AuthContext.Provider value={{ login, logout, loginError }}>
             {children}
         </AuthContext.Provider>
     );

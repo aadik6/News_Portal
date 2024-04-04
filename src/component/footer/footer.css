@@ -1,7 +1,6 @@
 .parentFooter{
     background-color: rgb(14, 14, 223);
     color: white;
-    height: 180px;
 }
 
 .footer{
@@ -52,4 +51,10 @@ dialog{
 
 dialog::backdrop{
     background-color: rgba(48, 43, 43, 0.384);
+}
+
+@media (max-width:640px){
+    .footer{
+        flex-wrap: wrap;
+    }
 }

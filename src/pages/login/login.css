@@ -1,9 +1,16 @@
 /* Add styles to your loginPage class */
+.login {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
 .loginPage {
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 300px;
+    width: 400px;
+    max-width: 500px;
     margin: 0 auto;
     padding: 20px;
     border: 1px solid #ccc;
@@ -29,9 +36,52 @@
     border: none;
     border-radius: 3px;
     cursor: pointer;
+    margin-top: 10px;
 }
 
 /* Hover effect for the login button */
 .loginPage button:hover {
     background-color: #45a049;
+}
+
+.kaka {
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+    width: 90%;
+}
+.kaka label {
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
+}
+
+.resetToLogin{
+    color: #2ec736;
+}
+.resetToLogin:visited{
+    color: #2ec736;
+}
+
+@media (min-height:1080px),(min-width:1920px) {
+    .loginPage{
+        width: 600px;
+        max-width: 700px;
+        padding: 40px;
+    }
+    .loginPage input{
+        height: 45px;
+        font-size: 30px;
+    }
+    .loginPage button{
+        font-size: 35px;
+    }
+    .kaka{
+        font-size: 25px;
+    }
+}
+@media (max-width:640px){
+    .kaka{
+        font-size: 15px;
+    }
 }
