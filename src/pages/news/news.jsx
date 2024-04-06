@@ -112,7 +112,7 @@ function News() {
     setInitialImage(URL.createObjectURL(file));
   };
 
-  if (loading) {
+  if (loading || loding) {
     return (
       <AdminLayout>
         <Loader />

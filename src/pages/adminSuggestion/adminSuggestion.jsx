@@ -3,22 +3,31 @@ import { DataTable } from '../../component/reactTable/reactTable';
 import { collection, getDocs,doc,deleteDoc } from 'firebase/firestore';
 import { db } from '../../firebase';
 import AdminLayout from '../../component/layout/adminLayout';
+import Loader from '../../component/loader/loader';
 
 function AdminSuggestion() {
     const [suggestionData, setSuggestionData] = useState([]);
     const [selectedSuggestion, setSelectedSuggestion] = useState(null);
+    const [loading, setLoading] = useState(true)
     const dialogRef = useRef(null);
 
     useEffect(() => {
         const fetchSuggestionData = async () => {
-            const suggestionRef = collection(db, "suggestionForm");
-            const querySnapshot = await getDocs(suggestionRef);
+            try{
+                const suggestionRef = collection(db, "suggestionForm");
+                const querySnapshot = await getDocs(suggestionRef);
+    
+                const suggestionList = [];
+                querySnapshot.forEach(doc => {
+                    suggestionList.push({ id: doc.id, ...doc.data() });
+                });
+                setSuggestionData(suggestionList);
+            }catch(error){
 
-            const suggestionList = [];
-            querySnapshot.forEach(doc => {
-                suggestionList.push({ id: doc.id, ...doc.data() });
-            });
-            setSuggestionData(suggestionList);
+            }finally{
+                setLoading(false)
+            }
+           
         };
         fetchSuggestionData();
     }, []);
@@ -58,6 +67,12 @@ function AdminSuggestion() {
             )
         }
     ];
+
+    if(loading){
+        return(
+            <Loader/>
+        )
+    }
 
     return (
         <AdminLayout>

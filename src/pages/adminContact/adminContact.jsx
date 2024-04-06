@@ -3,22 +3,31 @@ import { DataTable } from '../../component/reactTable/reactTable';
 import { collection, getDocs, deleteDoc,doc } from 'firebase/firestore';
 import { db } from '../../firebase';
 import AdminLayout from '../../component/layout/adminLayout';
+import Loader from '../../component/loader/loader';
 
 function AdminContact() {
     const [contactData, setContactData] = useState([]);
     const [selectedContact, setSelectedContact] = useState(null);
+    const [loading, setLoading]= useState(true)
     const dialogRef = useRef(null);
 
     useEffect(() => {
         const fetchContactData = async () => {
-            const contactRef = collection(db, "contactForm");
-            const querySnapshot = await getDocs(contactRef);
+            try {
+                const contactRef = collection(db, "contactForm");
+                const querySnapshot = await getDocs(contactRef);
 
-            const contactList = [];
-            querySnapshot.forEach(doc => {
-                contactList.push({ id: doc.id, ...doc.data() });
-            });
-            setContactData(contactList);
+                const contactList = [];
+                querySnapshot.forEach(doc => {
+                    contactList.push({ id: doc.id, ...doc.data() });
+                });
+                setContactData(contactList);
+            } catch (error) {
+                console.error("Error fetching contact data: ", error);
+                // Handle error scenarios, if any
+            } finally {
+                setLoading(false); // Set loading to false whether successful or not
+            }
         };
         fetchContactData();
     }, []);
@@ -61,6 +70,12 @@ function AdminContact() {
             )
         }
     ];
+
+    if(loading){
+        return(
+            <Loader/>
+        )
+    }
 
     return (
         <AdminLayout>
