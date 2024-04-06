@@ -46,4 +46,10 @@
   .signup-btn:hover {
     background-color: #45a049;
   }
+  @media (max-width:825px){
+    .signup{
+      width: unset;
+      min-width: 170px;
+    }
+  }
   

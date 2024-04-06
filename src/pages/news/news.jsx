@@ -4,7 +4,14 @@ import { DataTable } from "../../component/reactTable/reactTable";
 import AdminLayout from "../../component/layout/adminLayout";
 import Loader from "../../component/loader/loader";
 import { getSession } from "../../util/authContext";
-import { updateDoc, doc, getFirestore, deleteDoc } from "firebase/firestore";
+import {
+  updateDoc,
+  doc,
+  getFirestore,
+  deleteDoc,
+  collection,
+  getDocs,
+} from "firebase/firestore";
 import { app, storage } from "../../firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
@@ -13,63 +20,87 @@ function News() {
   const { newsData, loading, updatedNews } = useNewsContext();
   const [news, setNews] = useState([]);
   const dialogRef = useRef();
-  const { displayName } = getSession();
+  const { displayName, email } = getSession();
 
   const [editedFields, setEditedFields] = useState({});
   const [initialImage, setInitialImage] = useState(null);
+  const [loding, setLoding] = useState(true);
 
   useEffect(() => {
-    if (!loading && newsData.length > 0) {
-      setNews(newsData);
-    }
-  }, [newsData, loading]);
+    const fetchNewsData = async () => {
+      try {
+        if (loding) {
+          const newsCollection = collection(db, "News");
+          const querySnapshot = await getDocs(newsCollection);
+          const fetchedNewsData = querySnapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }));
+
+          let filteredNewsData = fetchedNewsData;
+          // check super admin
+          if (displayName && email!=='aadarshkumarman@gmail.com') {
+            filteredNewsData = fetchedNewsData.filter(
+              (newsItem) => newsItem.authorName === displayName
+            );
+          }
+
+          // fetchNewsData
+          setNews(filteredNewsData);
+          updatedNews(filteredNewsData);
+          setLoding(false);
+        }
+      } catch (error) {
+        console.error("Error fetching news data:", error);
+        setLoding(false);
+      }
+    };
+
+    fetchNewsData();
+  }, [db, displayName, updatedNews, loding]);
 
   const handleSave = async () => {
+    setLoding(true)
     try {
       let imageUrl = editedFields.image || editedFields.imageURL; // Use existing image URL if available
 
-      if (editedFields.image && typeof editedFields.image !== 'string') {
-        // Upload image to Firebase Storage only if it's a file
-        const storageRef = ref(storage, `images/${Date.now()}_${editedFields.image.name}`);
+      if (editedFields.image && typeof editedFields.image !== "string") {
+        const storageRef = ref(
+          storage,
+          `images/${Date.now()}_${editedFields.image.name}`
+        );
         await uploadBytes(storageRef, editedFields.image);
-        // Get the download URL of the uploaded image
         imageUrl = await getDownloadURL(storageRef);
       }
 
-      // Update the editedFields with the image URL
       const updatedFields = { ...editedFields, image: imageUrl };
 
-      // Perform patch operation on Firestore
       const newsRef = doc(db, "News", editedFields.id);
       await updateDoc(newsRef, updatedFields);
       dialogRef.current.close();
-      alert("News updated")
-      const updatedNewsData = newsData.map(newsItem =>
-        newsItem.id === editedFields.id ? { ...newsItem, ...updatedFields } : newsItem
+      alert("News updated");
+      const updatedNewsData = newsData.map((newsItem) =>
+        newsItem.id === editedFields.id
+          ? { ...newsItem, ...updatedFields }
+          : newsItem
       );
       updatedNews(updatedNewsData);
     } catch (error) {
       console.error("Error saving news:", error);
-      // Handle error, show a message to the user, etc.
     }
   };
 
   const handleDelete = async (id) => {
     try {
-      // Delete the news document from Firestore based on its ID
       await deleteDoc(doc(db, "News", id));
-      alert("News Deleted")
-      // You might want to show a success message or update the UI after deletion
-
-      // Remove the deleted news item from the news data without refreshing the page
-      const updatedNewsData = newsData.filter(newsItem => newsItem.id !== id);
+      alert("News Deleted");
+      const updatedNewsData = news.filter((newsItem) => newsItem.id !== id); // Filter out the deleted news item
+      setNews(updatedNewsData); // Update the state with filtered data
       updatedNews(updatedNewsData);
     } catch (error) {
       console.error("Error deleting news:", error);
-      // Handle error, show a message to the user, etc.
     }
   };
-
 
   const handlechange = (e, field) => {
     setEditedFields({ ...editedFields, [field]: e.target.value });
@@ -140,7 +171,13 @@ function News() {
       <AdminLayout>
         <DataTable columns={columns} data={news} />
         <dialog ref={dialogRef}>
-          <button onClick={() => { dialogRef.current.close() }}>x</button>
+          <button
+            onClick={() => {
+              dialogRef.current.close();
+            }}
+          >
+            x
+          </button>
           <div className="updateNews">
             <div className="input-group">
               <label htmlFor="heading">Heading</label>

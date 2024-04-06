@@ -1,24 +1,28 @@
 import React, { useState } from "react";
 import "../adminSidebar/adminSidebar.css";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useNavigate } from "react-router-dom";
 import {
+  faAddressBook,
+  faArrowTrendUp,
+  faEnvelopesBulk,
   faHouseUser,
+  faMessage,
   faNewspaper,
   faPenToSquare,
   faRightFromBracket,
   faSitemap,
+  faUserPlus,
 } from "@fortawesome/free-solid-svg-icons";
 
 function AdminSidebarVertical() {
-  const navigate = useNavigate();
   const [showAdministratorMenu, setShowAdministratorMenu] = useState(false);
 
   function toggleAdministratorMenu() {
     setShowAdministratorMenu(!showAdministratorMenu);
   }
+  const navigate  = useNavigate()
 
   function logout() {
     localStorage.clear();
@@ -56,29 +60,43 @@ function AdminSidebarVertical() {
             {showAdministratorMenu && (
               <ul className="nested">
                 <li>
-                  <NavLink to="/News_Portal/addUser">Add User</NavLink>
+                  <NavLink to="/News_Portal/addUser">
+                    <FontAwesomeIcon icon={faUserPlus} />
+                    <h4>Add User</h4>
+                  </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/News_Portal/adminHaveNews">Have News</NavLink>
+                  <NavLink to="/News_Portal/adminHaveNews">
+                    <FontAwesomeIcon icon={faEnvelopesBulk} />
+                    <h4>Post Request</h4>
+                  </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/News_Portal/adminContact">Contacts</NavLink>
+                  <NavLink to="/News_Portal/adminContact">
+                    <FontAwesomeIcon icon={faAddressBook} />
+                    <h4>Contact</h4>
+                  </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/News_Portal/adminSuggestion">Suggestions</NavLink>
+                  <NavLink to="/News_Portal/adminSuggestion">
+                    <FontAwesomeIcon icon={faMessage} />
+                    <h4>Sugestions</h4>
+                  </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/News_Portal/traffic">Traffic</NavLink>
+                  <NavLink to="/News_Portal/traffic">
+                    <FontAwesomeIcon icon={faArrowTrendUp} />
+                    <h4>Traffic</h4>
+                  </NavLink>
                 </li>
               </ul>
             )}
           </li>
           <li onClick={logout}>
             <div className="administrator">
-            <FontAwesomeIcon icon={faRightFromBracket} />
-            <h4>Logout</h4>
+              <FontAwesomeIcon icon={faRightFromBracket} />
+              <h4>Logout</h4>
             </div>
-           
           </li>
         </ul>
       </div>

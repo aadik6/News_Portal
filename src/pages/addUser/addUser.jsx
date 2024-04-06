@@ -8,6 +8,7 @@ import { app } from "../../firebase";
 import { useNavigate } from "react-router-dom";
 import AdminLayout from "../../component/layout/adminLayout";
 import "../addUser/addUser.css";
+
 const AddUser = () => {
   const auth = getAuth(app);
   const navigate = useNavigate();
@@ -15,15 +16,22 @@ const AddUser = () => {
   const initialState = {
     email: "",
     password: "",
+    confirmPassword: "",
     displayName: "",
   };
 
   const [user, setUser] = useState(initialState);
+  const [error, setError] = useState("");
 
-  const { email, password, displayName } = user; // Destructure user object
+  const { email, password, confirmPassword, displayName } = user;
 
   const signupUser = async () => {
     try {
+      if (password !== confirmPassword) {
+        setError("Passwords do not match");
+        return;
+      }
+
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
@@ -37,10 +45,10 @@ const AddUser = () => {
       });
 
       alert("User Created ");
-
-      navigate("/");
+      setUser(initialState);
     } catch (error) {
       console.error("Error signing up:", error.message);
+      setError(error.message);
     }
   };
 
@@ -89,11 +97,16 @@ const AddUser = () => {
               <div className="input-group">
                 <label>Confirm Password</label>
                 <input
-                type="password"
-                placeholder="Re enter Password"
-                id="confirmPassword"  
+                  type="password"
+                  placeholder="Re-enter Password"
+                  value={confirmPassword}
+                  onChange={(e) =>
+                    setUser({ ...user, confirmPassword: e.target.value })
+                  }
+                  required
                 />
               </div>
+              {error && <div className="error">{error}</div>}
             </div>
             <button onClick={signupUser} className="signup-btn">
               Create User

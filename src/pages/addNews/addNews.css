@@ -48,3 +48,10 @@
   margin-top: 10px;
   cursor: pointer;
 }
+
+@media (max-width:825px) {
+  .addNews{
+    width: unset;
+  }
+  
+}

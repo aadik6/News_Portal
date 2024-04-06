@@ -1,6 +1,6 @@
 import React from "react";
 import AdminLayout from "../../component/layout/adminLayout";
-import { getSession } from "../../util/authContext";
+import { getSession, useAuth } from "../../util/authContext";
 import '../dashboard/dashboard.css'
 
 function Dashboard() {
