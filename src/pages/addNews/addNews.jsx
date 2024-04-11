@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 import { app } from "../../firebase";
@@ -7,18 +7,21 @@ import { useAuth } from "../../util/authContext";
 import AdminLayout from "../../component/layout/adminLayout";
 import "../addNews/addNews.css";
 import { getSession } from "../../util/authContext";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
-// Initialize Firebase storage
-const storage = getStorage(app);
 
 function AddNews() {
+  const storage = getStorage(app);
+  const [buttonDisable, setButtonDisable] = useState(false)
   const { displayName } = getSession();
-  console.log(displayName, "name");
+  const inputFiledRef = useRef()
+  // console.log(displayName, "name");
 
   const initialState = {
     heading: "",
     description: "",
-    image: null, // Store image URL or reference here
+    image: null, 
     category: "",
     isBreaking: false,
     authorName: displayName,
@@ -27,7 +30,6 @@ function AddNews() {
   const [formData, setFormData] = useState(initialState);
   const [file, setFile] = useState(null);
 
-  // Handle input field changes
   const handlechange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -36,16 +38,15 @@ function AddNews() {
     }));
   };
 
-  // Handle file input changes
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
     setFile(selectedFile);
   };
 
-  // Handle posting news to Firestore
   const handlePostNews = async () => {
     try {
       // Create a reference to the file in Firebase storage
+      setButtonDisable(true)
       const uploadRef = ref(storage, `News/${file.name}`);
 
       // Upload the file to Firebase storage
@@ -64,11 +65,15 @@ function AddNews() {
 
       // Add the updated data to Firestore
       const docRef = await addDoc(collection(db, "News"), updatedData);
-      // console.log("Document written with ID: ", docRef.id);
+      toast.success('News posted successfully! 🎉');
       setFormData(initialState);
-      alert("News posted");
+      setFile(null)
+      inputFiledRef.current.value =""
     } catch (e) {
+      toast.error(`${e}😔`);
       console.error("Error adding document: ", e);
+    }finally{
+      setButtonDisable(false)
     }
   };
 
@@ -103,7 +108,7 @@ function AddNews() {
           <div className="threeInput-group">
             <div className="input-group">
               <label htmlFor="image">Image</label>
-              <input type="file" onChange={handleFileChange} />
+              <input type="file" onChange={handleFileChange} ref={inputFiledRef} />
             </div>
             <div className="input-group">
               <label htmlFor="category">Category</label>
@@ -139,8 +144,11 @@ function AddNews() {
             </div>
           </div>
 
-          <button onClick={handlePostNews}>Post News</button>
+          <button onClick={handlePostNews} disabled={buttonDisable}>
+            {buttonDisable ? "Posting" : "Post News"}
+          </button>
         </div>
+        <ToastContainer/>
       </>
     </AdminLayout>
   );

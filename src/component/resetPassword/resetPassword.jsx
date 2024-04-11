@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 function ResetPassword() {
     const [email, setEmail] = useState('');
-    const [resetError, setResetError] = useState(null);
     const [resetSuccess, setResetSuccess] = useState(false);
 
     const handleResetPassword = () => {
@@ -13,14 +14,13 @@ function ResetPassword() {
             .then(() => {
                 // Password reset email sent!
                 setResetSuccess(true);
-                setResetError(null);
                 setEmail('');
+                toast.success("Reset link sent successfully")
             })
             .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.log(error.message)
-                setResetError(errorMessage);
+                const errorMessage = error;
+                console.log(error)
+                toast.error(`${errorMessage}`)
                 setResetSuccess(false);
             });
     };
@@ -41,8 +41,8 @@ function ResetPassword() {
                         <p>Password reset email sent successfully!</p>
                         <Link to="/News_Portal/admin" className='resetToLogin'>Login</Link>
                     </>}
-                {resetError && <p>{resetError}</p>}
             </div>
+            <ToastContainer/>
         </div>
     );
 }

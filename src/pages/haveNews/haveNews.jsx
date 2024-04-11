@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 import { app } from "../../firebase";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import Layout from "../../component/layout/layout";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 import "./haveNews.css"
 
 // Initialize Firebase storage
@@ -21,6 +23,7 @@ function AlertNews() {
 
   const [formData, setFormData] = useState(initialState);
   const [file, setFile] = useState(null);
+  const inputFileRef = useRef(null);
 
   // Handle input field changes
   const handlechange = (e) => {
@@ -60,10 +63,13 @@ function AlertNews() {
       // Add the updated data to Firestore
       const docRef = await addDoc(collection(db, "Alert"), updatedData);
       // console.log("Document written with ID: ", docRef.id);
+      toast.success("News Sent Successfully")
       setFormData(initialState);
-      alert("News posted");
-    } catch (e) {
-      console.error("Error adding document: ", e);
+      setFile(null)
+      inputFileRef.current.value = "";
+    } catch (error) {
+      console.error("Error adding document: ", error);
+      toast.error(`${error}`)
     }
   };
 
@@ -97,7 +103,7 @@ function AlertNews() {
           <div className="threeInput-group">
             <div className="input-group">
               <label htmlFor="image">Image</label>
-              <input type="file" onChange={handleFileChange} />
+              <input type="file" onChange={handleFileChange} ref={inputFileRef} />
             </div>
             <div className="input-group">
               <label htmlFor="category">Related Category</label>
@@ -140,6 +146,7 @@ function AlertNews() {
 
           <button onClick={handlePostNews}>Send News</button>
         </div>
+        <ToastContainer/>
       </>
     </Layout>
   );

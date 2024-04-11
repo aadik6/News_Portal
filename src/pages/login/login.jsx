@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { app } from '../../firebase';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../util/authContext';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import '../login/login.css';
 
 function LoginPage() {
@@ -46,9 +48,8 @@ function LoginPage() {
                     <Link to="/News_Portal/reset">Forgot?</Link>
                 </div>
                 <button onClick={loginUser}>Login</button>
-                {loginError &&
-                <p>{loginError}</p>}
             </div>
+            <ToastContainer/>
         </div>
     );
 }

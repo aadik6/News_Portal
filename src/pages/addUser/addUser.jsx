@@ -7,6 +7,8 @@ import {
 import { app } from "../../firebase";
 import { useNavigate } from "react-router-dom";
 import AdminLayout from "../../component/layout/adminLayout";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 import "../addUser/addUser.css";
 
 const AddUser = () => {
@@ -21,14 +23,14 @@ const AddUser = () => {
   };
 
   const [user, setUser] = useState(initialState);
-  const [error, setError] = useState("");
+  // const [error, setError] = useState("");
 
   const { email, password, confirmPassword, displayName } = user;
 
   const signupUser = async () => {
     try {
       if (password !== confirmPassword) {
-        setError("Passwords do not match");
+        toast.error("Password not matched")
         return;
       }
 
@@ -44,11 +46,12 @@ const AddUser = () => {
         displayName: displayName,
       });
 
-      alert("User Created ");
+      toast.success("User Created successfully")
       setUser(initialState);
     } catch (error) {
       console.error("Error signing up:", error.message);
-      setError(error.message);
+      // setError(error.message);
+      toast.error(`${error.message}`)
     }
   };
 
@@ -106,7 +109,7 @@ const AddUser = () => {
                   required
                 />
               </div>
-              {error && <div className="error">{error}</div>}
+              {/* {error && <div className="error">{error}</div>} */}
             </div>
             <button onClick={signupUser} className="signup-btn">
               Create User
@@ -114,6 +117,7 @@ const AddUser = () => {
           </div>
         </div>
       </>
+      <ToastContainer/>
     </AdminLayout>
   );
 };
