@@ -4,6 +4,8 @@ import { collection, getDocs, deleteDoc,doc } from 'firebase/firestore';
 import { db } from '../../firebase';
 import AdminLayout from '../../component/layout/adminLayout';
 import Loader from '../../component/loader/loader';
+import { ToastContainer , toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function AdminContact() {
     const [contactData, setContactData] = useState([]);
@@ -41,9 +43,10 @@ function AdminContact() {
         try {
           await deleteDoc(doc(db, "contactForm", id));
           setContactData(contactData.filter((item) => item.id !== id));
+          toast.success("Contact Deleted")
         } catch (error) {
           console.error("Error deleting news: ", error);
-          // Handle error scenarios, if any
+          toast.error(`${error.message}`)
         }
       };
 
@@ -73,7 +76,9 @@ function AdminContact() {
 
     if(loading){
         return(
-            <Loader/>
+            <AdminLayout>             
+                <Loader/>
+            </AdminLayout>
         )
     }
 
@@ -91,6 +96,7 @@ function AdminContact() {
                     </div>
                 )}
             </dialog>
+            <ToastContainer/>
         </AdminLayout>
     );
 }

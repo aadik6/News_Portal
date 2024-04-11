@@ -14,6 +14,8 @@ import {
 } from "firebase/firestore";
 import { app, storage } from "../../firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function News() {
   const db = getFirestore(app);
@@ -39,7 +41,7 @@ function News() {
 
           let filteredNewsData = fetchedNewsData;
           // check super admin
-          if (displayName && email!=='aadarshkumarman@gmail.com') {
+          if (displayName && email !== "aadarshkumarman@gmail.com") {
             filteredNewsData = fetchedNewsData.filter(
               (newsItem) => newsItem.authorName === displayName
             );
@@ -60,7 +62,6 @@ function News() {
   }, [db, displayName, updatedNews, loding]);
 
   const handleSave = async () => {
-    setLoding(true)
     try {
       let imageUrl = editedFields.image || editedFields.imageURL; // Use existing image URL if available
 
@@ -78,7 +79,8 @@ function News() {
       const newsRef = doc(db, "News", editedFields.id);
       await updateDoc(newsRef, updatedFields);
       dialogRef.current.close();
-      alert("News updated");
+      toast.success("News Updated Successfully");
+      setLoding(true);
       const updatedNewsData = newsData.map((newsItem) =>
         newsItem.id === editedFields.id
           ? { ...newsItem, ...updatedFields }
@@ -86,18 +88,22 @@ function News() {
       );
       updatedNews(updatedNewsData);
     } catch (error) {
+      toast.error(`${error}`);
       console.error("Error saving news:", error);
+    }finally{
+      setLoding(true);
     }
   };
 
   const handleDelete = async (id) => {
     try {
       await deleteDoc(doc(db, "News", id));
-      alert("News Deleted");
       const updatedNewsData = news.filter((newsItem) => newsItem.id !== id); // Filter out the deleted news item
       setNews(updatedNewsData); // Update the state with filtered data
       updatedNews(updatedNewsData);
+      toast.success("News deleted");
     } catch (error) {
+      toast.error(`${error}`);
       console.error("Error deleting news:", error);
     }
   };
@@ -112,7 +118,7 @@ function News() {
     setInitialImage(URL.createObjectURL(file));
   };
 
-  if (loading || loding) {
+  if (loading) {
     return (
       <AdminLayout>
         <Loader />
@@ -144,6 +150,7 @@ function News() {
           <button
             onClick={() => {
               dialogRef.current.showModal();
+              setLoding(true)
               setEditedFields({
                 id: row.original.id,
                 heading: row.original.heading,
@@ -255,6 +262,7 @@ function News() {
             <button onClick={handleSave}>Save</button>
           </div>
         </dialog>
+        <ToastContainer />
       </AdminLayout>
     </>
   );

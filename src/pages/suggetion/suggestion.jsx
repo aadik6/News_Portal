@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
-import "./suggestion.css"
-import { addDoc, collection } from 'firebase/firestore';
-import { db } from '../../firebase';
+import React, { useState } from "react";
+import "./suggestion.css";
+import { addDoc, collection } from "firebase/firestore";
+import { db } from "../../firebase";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Suggestion = ({ close }) => {
+  const [buttonDisable, setButtonDisable] = useState(false);
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    suggestion: ''
+    name: "",
+    email: "",
+    suggestion: "",
   });
 
   const handleChange = (e) => {
@@ -15,19 +18,31 @@ const Suggestion = ({ close }) => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const suggestionForm = await addDoc(collection(db,"suggestionForm"),formData)
-    // Here you can handle the submission of the suggestion, e.g., send it to a server
-    console.log(formData);
-    // Close the suggestion dialog after submission
-    close();
+    try {
+      setButtonDisable(true);
+      const suggestionForm = await addDoc(
+        collection(db, "suggestionForm"),
+        formData
+      );
+      console.log(formData);
+      toast.success("Suggestion sent");
+      close();
+    } catch (error) {
+      toast.error(`${error}`);
+    } finally {
+      setButtonDisable(false);
+    }
   };
 
   return (
     <div className="suggestion-container">
       <h2>Thank you for your suggestion!</h2>
-      <p>We're always looking for ways to improve. Your feedback is valuable to us.</p>
+      <p>
+        We're always looking for ways to improve. Your feedback is valuable to
+        us.
+      </p>
       <p>Please feel free to share your thoughts and ideas.</p>
       <form onSubmit={handleSubmit}>
         <div>
@@ -63,8 +78,11 @@ const Suggestion = ({ close }) => {
           />
         </div>
         <button type="submit">Submit</button>
-        <button onClick={close}>Close</button>
+        <button onClick={close} disabled={buttonDisable}>
+          Close
+        </button>
       </form>
+      <ToastContainer />
     </div>
   );
 };

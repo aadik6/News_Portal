@@ -49,6 +49,12 @@
   cursor: pointer;
 }
 
+button :disabled{
+  -webkit-user-select: none; 
+  -ms-user-select: none; 
+  user-select: none; 
+}
+
 @media (max-width:825px) {
   .addNews{
     width: unset;

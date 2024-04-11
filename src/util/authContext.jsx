@@ -1,6 +1,8 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from "../firebase";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AuthContext = createContext();
 
@@ -10,15 +12,15 @@ export const AuthProvider = ({ children }) => {
     const login = async (email, password, navigate) => {
         try {
             const result= await signInWithEmailAndPassword(auth, email, password);
-            console.log(result.user.uid,"nama")
-            alert("user logged in");
-            console.log(auth.currentUser.emailVerified, "op");
+            toast.success("User logged in")
+            // console.log(auth.currentUser.emailVerified, "op");
             navigate('/News_Portal/dashboard');
             setSession(result)
         } catch (error) {
-            console.error(error.code, "errorCode");
-            console.error(error.message, "message");
+            // console.error(error.code, "errorCode");
+            // console.error(error.message, "message");
             setLoginError(error.message)
+            toast.error(`${error.message}`)
         }
     };
 

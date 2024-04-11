@@ -4,6 +4,9 @@ import { db } from "../../firebase";
 import { collection, getDocs, addDoc, deleteDoc, doc } from "firebase/firestore";
 import Loader from "../../component/loader/loader";
 import { DataTable } from "../../component/reactTable/reactTable";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 import "./adminHaveNews.css";
 
 const AdminHaveNews = () => {
@@ -46,9 +49,10 @@ const AdminHaveNews = () => {
   
       // Close the dialog
       dialogRef.current.close();
+      toast.success("News Posted successfully")
     } catch (error) {
       console.error("Error adding news: ", error);
-      // Handle error scenarios, if any
+      toast.error(`${error}`)
     }
   };
 
@@ -56,8 +60,10 @@ const AdminHaveNews = () => {
     try {
       await deleteDoc(doc(db, "Alert", id));
       setNews(news.filter((item) => item.id !== id));
+      toast.success("News Deleted successfully")
     } catch (error) {
       console.error("Error deleting news: ", error);
+      toast.error(`${error}`)
       // Handle error scenarios, if any
     }
   };
@@ -207,6 +213,7 @@ const AdminHaveNews = () => {
           )}
         </dialog>
       </div>
+      <ToastContainer/>
     </AdminLayout>
   );
 };
