@@ -14,7 +14,7 @@ import {
 } from "firebase/firestore";
 import { app, storage } from "../../firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function News() {
@@ -101,7 +101,7 @@ function News() {
       const updatedNewsData = news.filter((newsItem) => newsItem.id !== id); // Filter out the deleted news item
       setNews(updatedNewsData); // Update the state with filtered data
       updatedNews(updatedNewsData);
-      toast.success("News deleted");
+      toast.success("News deleted",{closeOnClick:true,pauseOnHover:false});
     } catch (error) {
       toast.error(`${error}`);
       console.error("Error deleting news:", error);
@@ -117,14 +117,6 @@ function News() {
     setEditedFields({ ...editedFields, image: file });
     setInitialImage(URL.createObjectURL(file));
   };
-
-  if (loading) {
-    return (
-      <AdminLayout>
-        <Loader />
-      </AdminLayout>
-    );
-  }
 
   const columns = [
     {
@@ -172,6 +164,15 @@ function News() {
       ),
     },
   ];
+
+  if (loading) {
+    return (
+      <AdminLayout>
+        <Loader />
+      </AdminLayout>
+    );
+  }
+
 
   return (
     <>
@@ -262,7 +263,6 @@ function News() {
             <button onClick={handleSave}>Save</button>
           </div>
         </dialog>
-        <ToastContainer />
       </AdminLayout>
     </>
   );

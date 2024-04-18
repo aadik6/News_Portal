@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import "../contact/contact.css"
 import { db } from '../../firebase';
 import { addDoc, collection } from 'firebase/firestore';
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Contact = ({ close }) => {
@@ -24,14 +24,12 @@ const Contact = ({ close }) => {
     e.preventDefault();
     try{
       setButtonDisable(true)
-      const contact = await addDoc(collection(db,"contactForm"), formData)
-      // console.log("coontact Id",contact.id)
+      const contact = await addDoc(collection(db,"contactForm"), formData)  
       toast.success("Contact details sent")
       close();
       setFormData(initial)
     }
     catch(error){
-      // console.log(error)
       toast.error(`${error.message}`)
     }finally{
       setButtonDisable(true)
@@ -84,7 +82,7 @@ const Contact = ({ close }) => {
         </div>
         <button type="submit" disabled={buttonDisable}>Submit</button>
       </form>
-      <button onClick={close}>Close</button>
+      <button onClick={close} className='closeBtn'>Close</button>
     </div>
   );
 };

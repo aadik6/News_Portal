@@ -117,7 +117,7 @@ const AddUser = () => {
           </div>
         </div>
       </>
-      <ToastContainer/>
+      {/* <ToastContainer/> */}
     </AdminLayout>
   );
 };

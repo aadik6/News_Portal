@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./suggestion.css";
 import { addDoc, collection } from "firebase/firestore";
 import { db } from "../../firebase";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Suggestion = ({ close }) => {
@@ -26,8 +26,12 @@ const Suggestion = ({ close }) => {
         collection(db, "suggestionForm"),
         formData
       );
-      console.log(formData);
       toast.success("Suggestion sent");
+      setFormData({
+        name: "",
+        email: "",
+        suggestion: "",
+      });
       close();
     } catch (error) {
       toast.error(`${error}`);
@@ -77,12 +81,11 @@ const Suggestion = ({ close }) => {
             required
           />
         </div>
-        <button type="submit">Submit</button>
-        <button onClick={close} disabled={buttonDisable}>
+        <button type="submit" disabled={buttonDisable}>Submit</button>
+        <button onClick={close} className="closeBtn">
           Close
         </button>
       </form>
-      <ToastContainer />
     </div>
   );
 };

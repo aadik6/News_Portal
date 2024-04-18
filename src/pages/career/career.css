@@ -1,6 +1,7 @@
-.careerContainer{
+.career{
   margin-top: 10px;
   max-width: 600px;
+  min-width: 300px;
   margin: 0 auto;
   padding: 20px;
   background-color: #f9f9f9;
@@ -9,14 +10,16 @@
 }
 
 .closeBtn {
-  position: absolute;
-  top: 0px;
-  right: 10px;
-  background-color: transparent;
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  background-color: rgb(255, 0, 179) !important;
+  color:white;
   border: none;
-  font-size: 18px;
+  border-radius: 3px;
   cursor: pointer;
 }
+
 .closeBtn:hover{
-  background-color: blue;
+  background-color: rgb(255, 0, 13) !important;
 }

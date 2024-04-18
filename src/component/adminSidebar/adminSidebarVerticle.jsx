@@ -105,7 +105,7 @@ function AdminSidebarVertical() {
           </li>
         </ul>
       </div>
-      <ToastContainer />
+      {/* <ToastContainer /> */}
     </>
   );
 }

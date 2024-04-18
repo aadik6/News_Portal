@@ -1,11 +1,15 @@
 import React from "react";
-import "./newsCard.css"
 
 function Card({ news, onClick }) {
   return (
     <div
       className="hero"
-      style={{ background: `url(${news.image})` }}
+      style={{
+        background: `url(${news.image})`,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        backgroundPosition: "center"
+      }}
       onClick={onClick}
     >
       <div className="hero-content">
@@ -17,3 +21,4 @@ function Card({ news, onClick }) {
 }
 
 export default Card;
+

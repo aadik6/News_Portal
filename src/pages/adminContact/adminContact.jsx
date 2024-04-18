@@ -4,7 +4,7 @@ import { collection, getDocs, deleteDoc,doc } from 'firebase/firestore';
 import { db } from '../../firebase';
 import AdminLayout from '../../component/layout/adminLayout';
 import Loader from '../../component/loader/loader';
-import { ToastContainer , toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function AdminContact() {
@@ -96,7 +96,6 @@ function AdminContact() {
                     </div>
                 )}
             </dialog>
-            <ToastContainer/>
         </AdminLayout>
     );
 }

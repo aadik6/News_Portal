@@ -4,7 +4,7 @@ import { collection, getDocs, doc, deleteDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 import AdminLayout from "../../component/layout/adminLayout";
 import Loader from "../../component/loader/loader";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
 function AdminSuggestion() {
@@ -43,7 +43,6 @@ function AdminSuggestion() {
       setSuggestionData(suggestionData.filter((item) => item.id !== id));
       toast.success("Suggestion Deleted")
     } catch (error) {
-      // console.error("Error deleting news: ", error);
       toast.error(`${error}`)
       
     }

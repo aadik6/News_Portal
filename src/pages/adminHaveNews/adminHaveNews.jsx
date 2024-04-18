@@ -4,7 +4,7 @@ import { db } from "../../firebase";
 import { collection, getDocs, addDoc, deleteDoc, doc } from "firebase/firestore";
 import Loader from "../../component/loader/loader";
 import { DataTable } from "../../component/reactTable/reactTable";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
 import "./adminHaveNews.css";
@@ -213,7 +213,6 @@ const AdminHaveNews = () => {
           )}
         </dialog>
       </div>
-      <ToastContainer/>
     </AdminLayout>
   );
 };

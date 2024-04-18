@@ -4,7 +4,6 @@ import { useNewsContext } from "../../context/newsFetcher";
 import Loader from "../../component/loader/loader";
 import Card from "../../component/card/newsCard";
 import Article from "../../component/article/article";
-import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import "../homePage/homePage.css";
 
@@ -48,7 +47,6 @@ function HomePage() {
           </div>
         )}
       </div>
-      <ToastContainer/>
     </Layout>
   );
 }

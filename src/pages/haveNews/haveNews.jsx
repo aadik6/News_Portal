@@ -4,7 +4,7 @@ import { db } from "../../firebase";
 import { app } from "../../firebase";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import Layout from "../../component/layout/layout";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import "./haveNews.css"
 
@@ -146,7 +146,6 @@ function AlertNews() {
 
           <button onClick={handlePostNews}>Send News</button>
         </div>
-        <ToastContainer/>
       </>
     </Layout>
   );
