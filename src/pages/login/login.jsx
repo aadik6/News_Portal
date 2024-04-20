@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { app } from '../../firebase';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../util/authContext';
-import { ToastContainer, toast } from "react-toastify";
+import {  toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import '../login/login.css';
 
@@ -49,7 +49,6 @@ function LoginPage() {
                 </div>
                 <button onClick={loginUser}>Login</button>
             </div>
-            <ToastContainer/>
         </div>
     );
 }
