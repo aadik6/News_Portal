@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, serverTimestamp  } from "firebase/firestore";
 import { db } from "../../firebase";
 import { app } from "../../firebase";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
@@ -57,10 +57,12 @@ function AddNews() {
       const downloadURL = await getDownloadURL(snapshot.ref);
       console.log("download url:", downloadURL);
 
+      const currentTime = serverTimestamp();
       // Update formData with the image URL
       const updatedData = {
         ...formData,
         image: downloadURL,
+        time: currentTime,
       };
 
       // Add the updated data to Firestore

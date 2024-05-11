@@ -1,58 +1,82 @@
-/* .article-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  } */
-  .article-verlay{
-    width: 100%;
-  }
-  
-  .article-modal {
-    background-color: #fff;
-    padding: 20px;
-    max-width: 100vw;
-    width: 90%;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .Back-btn {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-bottom: 20px;
-  }
-  
-  h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
-  
-  img {
-    max-width: 100%;
-    border-radius: 8px;
-    margin-bottom: 10px;
-  }
-  
-  p {
-    font-size: 16px;
-    line-height: 1.6;
-  }
-  .description{
-    text-align: justify;
-  }
 
-  .socialMediaIcons{
-    display: flex;
-    gap: 10px;
-    font-size: 2em;
-  }
+.image-container{
+  height: 30rem;
+  background-position: center;
+  background-size: cover;
+  border-radius: 10px;
+}
+.article-overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.article-verlay {
+  width: 100%;
+}
+
+.article-modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 100vw;
+  width: 90%;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.newsRow{
+  display: flex;
+  align-items: baseline;
+  gap: 15px;
+}
+.authorName,.postTime{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.Back-btn {
+  position: fixed;
+  left: 10px;
+  top: 40%;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  z-index: +11;
+}
+.newsHeading{
+  position: sticky;
+  top: 12vh;
+  background-color: white;
+  width: 90vw;
+  text-align: center;
+}
+h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+img {
+  max-width: 100%;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+p {
+  font-size: 16px;
+  line-height: 1.6;
+}
+.description {
+  text-align: justify;
+}
+
+.socialMediaIcons {
+  display: flex;
+  gap: 10px;
+  font-size: 2em;
+}

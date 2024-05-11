@@ -42,7 +42,6 @@ function ResetPassword() {
                         <Link to="/News_Portal/admin" className='resetToLogin'>Login</Link>
                     </>}
             </div>
-            {/* <ToastContainer/> */}
         </div>
     );
 }

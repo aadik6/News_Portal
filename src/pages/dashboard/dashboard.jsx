@@ -11,8 +11,8 @@ function Dashboard() {
       <>
         <div className="parentDashboard">
           <h1>{displayName}</h1>
-          <p>{email}</p>
-          <p>{uid}</p>
+          <p>Email: <strong>{email}</strong></p>
+          <p>User Id: <strong>{uid}</strong></p>
         </div>
       </>
     </AdminLayout>
