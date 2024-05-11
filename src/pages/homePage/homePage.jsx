@@ -10,6 +10,7 @@ import "../homePage/homePage.css";
 function HomePage() {
   const { newsData, loading } = useNewsContext();
   const [selectedArticle, setSelectedArticle] = useState(null);
+  console.log(newsData.length,"lll")
 
   if (loading) {
     return (
@@ -37,7 +38,7 @@ function HomePage() {
         ) : (
           // Render the Card components
           <div className="parent-hero">
-            {newsData.slice(0, 4).map((newsItem, index) => (
+            {newsData.map((newsItem, index) => (
               <Card
                 key={index}
                 news={newsItem}

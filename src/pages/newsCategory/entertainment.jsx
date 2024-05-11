@@ -10,7 +10,7 @@ function EntertainmentPage() {
   const { newsData, loading } = useNewsContext();
   const [selectedArticle, setSelectedArticle] = useState(null);
 
-  const entertainmentNews = newsData.filter(newsItem => newsItem.category === 'sport');
+  const entertainmentNews = newsData.filter(newsItem => newsItem.category === 'entertainment');
 
   if(loading){
     return(
