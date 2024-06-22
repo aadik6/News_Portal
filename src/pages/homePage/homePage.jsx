@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "../../component/layout/layout";
 import { useNewsContext } from "../../context/newsFetcher";
 import Loader from "../../component/loader/loader";
@@ -9,8 +9,15 @@ import "../homePage/homePage.css";
 
 function HomePage() {
   const { newsData, loading } = useNewsContext();
+  const [sortedNewsData, setSortedNewsData] = useState([]);
   const [selectedArticle, setSelectedArticle] = useState(null);
-  console.log(newsData.length,"lll")
+
+  useEffect(() => {
+    if (newsData.length > 0) {
+      const sortedData = [...newsData].sort((a, b) => new Date(b.date) - new Date(a.date));
+      setSortedNewsData(sortedData);
+    }
+  }, [newsData]);
 
   if (loading) {
     return (
@@ -23,7 +30,7 @@ function HomePage() {
   }
 
   const handleNewsItemClick = (index) => {
-    setSelectedArticle(newsData[index]);
+    setSelectedArticle(sortedNewsData[index]);
   };
 
   return (
@@ -38,7 +45,7 @@ function HomePage() {
         ) : (
           // Render the Card components
           <div className="parent-hero">
-            {newsData.map((newsItem, index) => (
+            {sortedNewsData.map((newsItem, index) => (
               <Card
                 key={index}
                 news={newsItem}

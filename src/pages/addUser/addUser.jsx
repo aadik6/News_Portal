@@ -33,9 +33,15 @@ const AddUser = () => {
         return;
       }
 
-      const nameRegex = /^[^\d]*$/;
+      const nameRegex = /^[A-Za-z\s]+$/;
       if (!nameRegex.test(displayName)) {
-        toast.error("Name cannot contain numbers");
+        toast.error("Name can only contain letters and spaces");
+        return;
+      }
+
+      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      if (!emailRegex.test(email)) {
+        toast.error("Please enter a valid email address");
         return;
       }
 
