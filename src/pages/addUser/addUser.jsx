@@ -23,14 +23,19 @@ const AddUser = () => {
   };
 
   const [user, setUser] = useState(initialState);
-  // const [error, setError] = useState("");
 
   const { email, password, confirmPassword, displayName } = user;
 
   const signupUser = async () => {
     try {
       if (password !== confirmPassword) {
-        toast.error("Password not matched")
+        toast.error("Passwords do not match");
+        return;
+      }
+
+      const nameRegex = /^[^\d]*$/;
+      if (!nameRegex.test(displayName)) {
+        toast.error("Name cannot contain numbers");
         return;
       }
 
@@ -46,12 +51,11 @@ const AddUser = () => {
         displayName: displayName,
       });
 
-      toast.success("User Created successfully")
+      toast.success("User created successfully");
       setUser(initialState);
     } catch (error) {
       console.error("Error signing up:", error.message);
-      // setError(error.message);
-      toast.error(`${error.message}`)
+      toast.error(error.message);
     }
   };
 
@@ -109,7 +113,6 @@ const AddUser = () => {
                   required
                 />
               </div>
-              {/* {error && <div className="error">{error}</div>} */}
             </div>
             <button onClick={signupUser} className="signup-btn">
               Create User
@@ -117,7 +120,7 @@ const AddUser = () => {
           </div>
         </div>
       </>
-      {/* <ToastContainer/> */}
+      <ToastContainer />
     </AdminLayout>
   );
 };
