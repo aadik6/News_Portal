@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import "../contact/contact.css"
+import "../contact/contact.css";
 import { db } from '../../firebase';
 import { addDoc, collection } from 'firebase/firestore';
 import { toast } from "react-toastify";
@@ -22,17 +22,31 @@ const Contact = ({ close }) => {
 
   const handleSubmit = async(e) => {
     e.preventDefault();
-    try{
-      setButtonDisable(true)
-      const contact = await addDoc(collection(db,"contactForm"), formData)  
-      toast.success("Contact details sent")
-      close();
-      setFormData(initial)
+
+    // Validate name
+    const isNameOnlyNumbers = /^\d+$/.test(formData.name);
+    if (isNameOnlyNumbers) {
+      toast.error("Name cannot be only numbers!");
+      return;
     }
-    catch(error){
-      toast.error(`${error.message}`)
-    }finally{
-      setButtonDisable(true)
+
+    // Validate phone number
+    const isPhoneValid = /^\d{10}$/.test(formData.phone);
+    if (!isPhoneValid) {
+      toast.error("Phone number must be exactly 10 digits!");
+      return;
+    }
+
+    try {
+      setButtonDisable(true);
+      await addDoc(collection(db, "contactForm"), formData);
+      toast.success("Contact details sent");
+      close();
+      setFormData(initial);
+    } catch(error) {
+      toast.error(`${error.message}`);
+    } finally {
+      setButtonDisable(false);
     }
   };
 
@@ -63,12 +77,15 @@ const Contact = ({ close }) => {
           />
         </div>
         <div>
-          <label htmlFor='phone'>Phone</label>
-          <input type="tel"
-          id='phone'
-          name='phone'
-          value={formData.phone}
-          onChange={handleChange} />
+          <label htmlFor='phone'>Phone:</label>
+          <input
+            type="tel"
+            id='phone'
+            name='phone'
+            value={formData.phone}
+            onChange={handleChange}
+            required
+          />
         </div>
         <div>
           <label htmlFor="message">Message:</label>
