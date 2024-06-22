@@ -36,7 +36,7 @@ function Technology() {
         />
       ) : (
         <div className="parent-hero">
-          {technologyNews.slice(0, 4).map((newsItem, index) => (
+          {technologyNews.map((newsItem, index) => (
             <Card
               key={index}
               news={newsItem}

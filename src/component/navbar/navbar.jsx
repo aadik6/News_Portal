@@ -14,15 +14,15 @@ function Navbar() {
     <>
       <div className="parent-nav">
         <div className="navbar">
-          <div className="log">Logo</div>
+          <div className="log">NewsWave</div>
           <div className="nav-items">
             <ul className={isOpen ? "nav-items-open" : "nav-items-closed"}>
               <li><NavLink to="/News_Portal">Home</NavLink></li>
+              <li><NavLink to="/News_Portal/politics">Politics</NavLink></li>
+              <li><NavLink to="/News_Portal/sport">Sport</NavLink></li>
+              <li><NavLink to="/News_Portal/education">Education</NavLink></li>
               <li><NavLink to="/News_Portal/technology">Technology</NavLink></li>
               <li><NavLink to="/News_Portal/entertainment">Entertainment</NavLink></li>
-              <li><NavLink to="/News_Portal/politics">Politics</NavLink></li>
-              <li><NavLink to="/News_Portal/education">Education</NavLink></li>
-              <li><NavLink to="/News_Portal/sport">Sport</NavLink></li>
             </ul>
           </div>
           <div className="hamburger" onClick={toggleMenu}>

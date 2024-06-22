@@ -87,12 +87,12 @@ function AdminSidebarVertical() {
                       <h4>Sugestions</h4>
                     </NavLink>
                   </li>
-                  <li>
+                  {/* <li>
                     <NavLink to="/News_Portal/traffic">
                       <FontAwesomeIcon icon={faArrowTrendUp} />
                       <h4>Traffic</h4>
                     </NavLink>
-                  </li>
+                  </li> */}
                 </ul>
               )}
             </li>

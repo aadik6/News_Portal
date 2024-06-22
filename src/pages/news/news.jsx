@@ -95,13 +95,19 @@ function News() {
     }
   };
 
+
   const handleDelete = async (id) => {
+    const isConfirmed = window.confirm("Are you sure you want to delete this news?");
+    if (!isConfirmed) {
+      return;
+    }
+
     try {
       await deleteDoc(doc(db, "News", id));
       const updatedNewsData = news.filter((newsItem) => newsItem.id !== id); // Filter out the deleted news item
       setNews(updatedNewsData); // Update the state with filtered data
       updatedNews(updatedNewsData);
-      toast.success("News deleted",{closeOnClick:true,pauseOnHover:false});
+      toast.success("News deleted", { closeOnClick: true, pauseOnHover: false });
     } catch (error) {
       toast.error(`${error}`);
       console.error("Error deleting news:", error);
@@ -239,6 +245,7 @@ function News() {
                   <option value="sport">Sport</option>
                   <option value="politics">Politics</option>
                   <option value="education">Education</option>
+                  <option value="entertainment">Entertainment</option>
                 </select>
               </div>
               <div className="input-group">

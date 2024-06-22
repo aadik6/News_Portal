@@ -34,7 +34,7 @@ function EntertainmentPage() {
         />
       ):(
         <div className='parent-hero'>    
-        {entertainmentNews.slice(0, 4).map((newsItem, index) => (
+        {entertainmentNews.map((newsItem, index) => (
           <Card
           key={index}
           news={newsItem}

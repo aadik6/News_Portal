@@ -37,7 +37,7 @@ function Education() {
         />
       ):(
       <div className="parent-hero">
-        {educationNews.slice(0, 4).map((newsItem, index) => (
+        {educationNews.map((newsItem, index) => (
           <Card
             key={index}
             news={newsItem}

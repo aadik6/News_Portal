@@ -33,7 +33,7 @@ function Footer() {
                     <div className="footerTwo">
                         <h3>Quick Links</h3>
                         <ul>
-                            <li>Advertisement</li>
+                            {/* <li>Advertisement</li> */}
                             <li onClick={()=>{suggestionDialogRef.current.showModal()}}>Suggestion</li>
                             <li>
                                 <Link to="/News_Portal/haveNews">Have News</Link>

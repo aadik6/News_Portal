@@ -8,7 +8,7 @@ import AdminLayout from "../../component/layout/adminLayout";
 import "../addNews/addNews.css";
 import { getSession } from "../../util/authContext";
 import { toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 
 function AddNews() {
   const storage = getStorage(app);
@@ -20,7 +20,7 @@ function AddNews() {
     heading: "",
     description: "",
     image: null,
-    category: "",
+    category: "technology",
     isBreaking: false,
     authorName: displayName,
   };
@@ -42,33 +42,36 @@ function AddNews() {
   };
 
   const handlePostNews = async () => {
-    // Regular expression to check for alphanumeric characters and at least one letter
-    const alphanumericWithLetterRegex = /^(?=.*[a-zA-Z])[a-zA-Z0-9\s]+$/;
+    // const alphanumericWithLetterRegex = /^(?=.*[a-zA-Z])[a-zA-Z\s]+$/;
+    // const descriptionRegex = /^(?=.*[a-zA-Z])[a-zA-Z0-9\s]+$/;
 
     // Check if heading or description is empty
     if (!formData.heading) {
-      toast.error('Heading cannot be empty!');
+      toast.error("Heading cannot be empty!");
       return;
     }
     if (!formData.description) {
-      toast.error('Description cannot be empty!');
+      toast.error("Description cannot be empty!");
       return;
     }
     if (!file) {
-      toast.warning('Upload an image!');
+      toast.warning("Upload an image!");
       return;
     }
 
-    // Check if heading and description are alphanumeric and contain at least one letter
-    if (!alphanumericWithLetterRegex.test(formData.heading)) {
-      toast.error('Heading must contain alphanumeric characters');
-      return;
-    }
+    // // Check if heading does not contain numbers and contains at least one letter
+    // if (!alphanumericWithLetterRegex.test(formData.heading)) {
+    //   toast.error(
+    //     "Heading must not contain numbers and must contain at least one letter"
+    //   );
+    //   return;
+    // }
 
-    if (!alphanumericWithLetterRegex.test(formData.description)) {
-      toast.error('Description must contain alphanumeric characters');
-      return;
-    }
+    // // Check if description is alphanumeric and contains at least one letter
+    // if (!descriptionRegex.test(formData.description)) {
+    //   toast.error("Description must contain alphanumeric characters");
+    //   return;
+    // }
 
     try {
       // Create a reference to the file in Firebase storage
@@ -93,7 +96,7 @@ function AddNews() {
 
       // Add the updated data to Firestore
       const docRef = await addDoc(collection(db, "News"), updatedData);
-      toast.success('News posted successfully! 🎉');
+      toast.success("News posted successfully! 🎉");
       setFormData(initialState);
       setFile(null);
       inputFiledRef.current.value = "";
@@ -136,7 +139,11 @@ function AddNews() {
           <div className="threeInput-group">
             <div className="input-group">
               <label htmlFor="image">Image</label>
-              <input type="file" onChange={handleFileChange} ref={inputFiledRef} />
+              <input
+                type="file"
+                onChange={handleFileChange}
+                ref={inputFiledRef}
+              />
             </div>
             <div className="input-group">
               <label htmlFor="category">Category</label>

@@ -1,6 +1,6 @@
 import React from "react";
 import { useNewsContext } from "../../context/newsFetcher";
-import "./breaking.css"; // Import the CSS file
+import "./breaking.css";
 import Loader from "../loader/loader";
 
 function Breaking() {
