@@ -62,6 +62,15 @@ function News() {
   }, [db, displayName, updatedNews, loding]);
 
   const handleSave = async () => {
+    if (!editedFields.heading) {
+      toast.error("Heading cannot be empty!");
+      return;
+    }
+    if (!editedFields.description) {
+      toast.error("Description cannot be empty!");
+      return;
+    }
+
     try {
       let imageUrl = editedFields.image || editedFields.imageURL; // Use existing image URL if available
 
@@ -94,7 +103,6 @@ function News() {
       setLoding(true);
     }
   };
-
 
   const handleDelete = async (id) => {
     const isConfirmed = window.confirm("Are you sure you want to delete this news?");
@@ -178,7 +186,6 @@ function News() {
       </AdminLayout>
     );
   }
-
 
   return (
     <>
