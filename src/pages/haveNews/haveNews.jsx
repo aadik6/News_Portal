@@ -40,8 +40,27 @@ function AlertNews() {
     setFile(selectedFile);
   };
 
+  // Validate image file type
+  const isValidImageType = (file) => {
+    const validImageTypes = ["image/jpeg", "image/png"];
+    return file && validImageTypes.includes(file.type);
+  };
+
   // Handle posting news to Firestore
   const handlePostNews = async () => {
+    if (!formData.heading) {
+      toast.error("Heading cannot be empty!");
+      return;
+    }
+    if (!formData.description) {
+      toast.error("Description cannot be empty!");
+      return;
+    }
+    if (!isValidImageType(file)) {
+      toast.error("Please upload a valid JPEG or PNG image!");
+      return;
+    }
+
     try {
       // Create a reference to the file in Firebase storage within the "Alert" folder
       const uploadRef = ref(storage, `Alert/${file.name}`);
@@ -63,13 +82,13 @@ function AlertNews() {
       // Add the updated data to Firestore
       const docRef = await addDoc(collection(db, "Alert"), updatedData);
       // console.log("Document written with ID: ", docRef.id);
-      toast.success("News Sent Successfully")
+      toast.success("News Sent Successfully");
       setFormData(initialState);
-      setFile(null)
+      setFile(null);
       inputFileRef.current.value = "";
     } catch (error) {
       console.error("Error adding document: ", error);
-      toast.error(`${error}`)
+      toast.error(`${error}`);
     }
   };
 
