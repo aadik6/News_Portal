@@ -23,6 +23,7 @@ function AlertNews() {
 
   const [formData, setFormData] = useState(initialState);
   const [file, setFile] = useState(null);
+  const [buttonDisable, setButtonDisable] = useState(false);
   const inputFileRef = useRef(null);
 
   // Handle input field changes
@@ -71,6 +72,8 @@ function AlertNews() {
     }
 
     try {
+      setButtonDisable(true);
+      
       // Create a reference to the file in Firebase storage within the "Alert" folder
       const uploadRef = ref(storage, `Alert/${file.name}`);
 
@@ -97,6 +100,8 @@ function AlertNews() {
     } catch (error) {
       console.error("Error adding document: ", error);
       toast.error(`${error.message}`);
+    } finally {
+      setButtonDisable(false);
     }
   };
 
@@ -178,7 +183,7 @@ function AlertNews() {
             </div>
           </div>
 
-          <button onClick={handlePostNews}>Send News</button>
+          <button onClick={handlePostNews} disabled={buttonDisable}>Send News</button>
         </div>
       </>
     </Layout>

@@ -30,6 +30,12 @@ function AddNews() {
 
   const handlechange = (e) => {
     const { name, value } = e.target;
+
+    if (name === "heading" && !/^[a-zA-Z\s]*$/.test(value)) {
+      toast.error("Heading can only contain letters and spaces!");
+      return;
+    }
+
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
@@ -48,14 +54,8 @@ function AddNews() {
   };
 
   const handlePostNews = async () => {
-    const isHeadingOnlyNumbers = /^\d+$/.test(formData.heading);
-
     if (!formData.heading) {
       toast.error("Heading cannot be empty!");
-      return;
-    }
-    if (isHeadingOnlyNumbers) {
-      toast.error("Heading cannot be only numbers!");
       return;
     }
     if (!formData.description) {
@@ -153,6 +153,7 @@ function AddNews() {
               id="isBreaking"
               value={formData.isBreaking}
               onChange={handlechange}
+              required
             >
               <option value="true">Yes</option>
               <option value="false">No</option>
