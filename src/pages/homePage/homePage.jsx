@@ -14,7 +14,15 @@ function HomePage() {
 
   useEffect(() => {
     if (newsData.length > 0) {
-      const sortedData = [...newsData].sort((a, b) => new Date(b.date) - new Date(a.date));
+      console.log("Original newsData:", newsData);
+      const sortedData = [...newsData]
+        .filter(item => item.time && item.time.seconds && item.time.nanoseconds)
+        .sort((a, b) => {
+          const dateA = new Date(a.time.seconds * 1000 + a.time.nanoseconds / 1000000);
+          const dateB = new Date(b.time.seconds * 1000 + b.time.nanoseconds / 1000000);
+          return dateB - dateA;
+        });
+      console.log("Sorted newsData:", sortedData);
       setSortedNewsData(sortedData);
     }
   }, [newsData]);
@@ -37,13 +45,11 @@ function HomePage() {
     <Layout>
       <div className="HomePage-parent">
         {selectedArticle ? (
-          // Render the Article component
           <Article
             article={selectedArticle}
             onClose={() => setSelectedArticle(null)}
           />
         ) : (
-          // Render the Card components
           <div className="parent-hero">
             {sortedNewsData.map((newsItem, index) => (
               <Card
