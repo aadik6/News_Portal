@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { useState } from "react";
 import { useNewsContext } from "../../context/newsFetcher";
 import Loader from "../../component/loader/loader";
@@ -8,11 +8,28 @@ import Card from "../../component/card/newsCard";
 
 function Sport() {
   const { newsData, loading } = useNewsContext();
+  const [sortedNewsData, setSortedNewsData] = useState([]);
   const [selectedArticle, setSelectedArticle] = useState(null);
 
-  const sportNews = newsData.filter(
-    (newsItem) => newsItem.category === "sport"
-  );
+ 
+  useEffect(() => {
+    const sportNews = newsData.filter(
+      (newsItem) => newsItem.category === "sport"
+    );
+    if (sportNews.length > 0) {
+      console.log("Original newsData:", sportNews);
+      const sortedData = [...sportNews]
+        .filter(item => item.time && item.time.seconds && item.time.nanoseconds)
+        .sort((a, b) => {
+          const dateA = new Date(a.time.seconds * 1000 + a.time.nanoseconds / 1000000);
+          const dateB = new Date(b.time.seconds * 1000 + b.time.nanoseconds / 1000000);
+          return dateB - dateA;
+        });
+      console.log("Sorted newsData:", sortedData);
+      setSortedNewsData(sortedData);
+    }
+  }, [newsData]);
+
 
   if (loading) {
     return (
@@ -23,7 +40,7 @@ function Sport() {
   }
 
   const handleNewsItemClick = (index) => {
-    setSelectedArticle(sportNews[index]);
+    setSelectedArticle(sortedNewsData[index]);
   };
 
   return (
@@ -36,7 +53,7 @@ function Sport() {
         />
       ) : (
         <div className="parent-hero">
-          {sportNews.map((newsItem, index) => (
+          {sortedNewsData.map((newsItem, index) => (
             <Card
               key={index}
               news={newsItem}

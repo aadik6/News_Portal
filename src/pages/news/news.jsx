@@ -40,16 +40,24 @@ function News() {
           }));
 
           let filteredNewsData = fetchedNewsData;
-          // check super admin
+          // Check super admin
           if (displayName && email !== "aadarshkumarman@gmail.com") {
             filteredNewsData = fetchedNewsData.filter(
               (newsItem) => newsItem.authorName === displayName
             );
           }
 
-          // fetchNewsData
-          setNews(filteredNewsData);
-          updatedNews(filteredNewsData);
+          // Convert Firebase timestamps to JavaScript Date objects and sort the news data
+          const sortedNewsData = filteredNewsData
+            .filter((newsItem) => newsItem.time && newsItem.time.seconds && newsItem.time.nanoseconds)
+            .sort((a, b) => {
+              const dateA = new Date(a.time.seconds * 1000 + a.time.nanoseconds / 1000000);
+              const dateB = new Date(b.time.seconds * 1000 + b.time.nanoseconds / 1000000);
+              return dateB - dateA;
+            });
+
+          setNews(sortedNewsData);
+          updatedNews(sortedNewsData);
           setLoding(false);
         }
       } catch (error) {
@@ -99,7 +107,7 @@ function News() {
     } catch (error) {
       toast.error(`${error}`);
       console.error("Error saving news:", error);
-    }finally{
+    } finally {
       setLoding(true);
     }
   };
@@ -156,7 +164,7 @@ function News() {
           <button
             onClick={() => {
               dialogRef.current.showModal();
-              setLoding(true)
+              setLoding(true);
               setEditedFields({
                 id: row.original.id,
                 heading: row.original.heading,

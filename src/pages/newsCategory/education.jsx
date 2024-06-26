@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { useState } from "react";
 import { useNewsContext } from "../../context/newsFetcher";
 import Loader from "../../component/loader/loader";
@@ -10,10 +10,25 @@ import "./style.css";
 function Education() {
   const { newsData, loading } = useNewsContext();
   const [selectedArticle, setSelectedArticle] = useState(null);
+  const [sortedNewsData, setSortedNewsData] = useState([]);
 
-  const educationNews = newsData.filter(
-    (newsItem) => newsItem.category === "education"
-  );
+  useEffect(() => {
+    const educationNews = newsData.filter(
+      (newsItem) => newsItem.category === "education"
+    );
+    if (educationNews.length > 0) {
+      console.log("Original newsData:", educationNews);
+      const sortedData = [...educationNews]
+        .filter(item => item.time && item.time.seconds && item.time.nanoseconds)
+        .sort((a, b) => {
+          const dateA = new Date(a.time.seconds * 1000 + a.time.nanoseconds / 1000000);
+          const dateB = new Date(b.time.seconds * 1000 + b.time.nanoseconds / 1000000);
+          return dateB - dateA;
+        });
+      console.log("Sorted newsData:", sortedData);
+      setSortedNewsData(sortedData);
+    }
+  }, [newsData]);
 
   if (loading) {
     return (
@@ -24,7 +39,7 @@ function Education() {
   }
 
   const handleNewsItemClick = (index) => {
-    setSelectedArticle(educationNews[index]);
+    setSelectedArticle(sortedNewsData[index]);
   };
 
   return (
@@ -37,7 +52,7 @@ function Education() {
         />
       ):(
       <div className="parent-hero">
-        {educationNews.map((newsItem, index) => (
+        {sortedNewsData.map((newsItem, index) => (
           <Card
             key={index}
             news={newsItem}

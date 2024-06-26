@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNewsContext } from "../../context/newsFetcher";
 import Loader from "../../component/loader/loader";
 import Layout from "../../component/layout/layout";
@@ -8,11 +7,26 @@ import Card from "../../component/card/newsCard";
 
 function PoliticsPage() {
   const { newsData, loading } = useNewsContext();
+  const [sortedNewsData, setSortedNewsData] = useState([]);
   const [selectedArticle, setSelectedArticle] = useState(null);
 
-  const politicsNews = newsData.filter(
-    (newsItem) => newsItem.category === "politics"
-  );
+  useEffect(() => {
+    const politicsNews = newsData.filter(
+      (newsItem) => newsItem.category === "politics"
+    );
+    if (politicsNews.length > 0) {
+      console.log("Original newsData:", politicsNews);
+      const sortedData = [...politicsNews]
+        .filter(item => item.time && item.time.seconds && item.time.nanoseconds)
+        .sort((a, b) => {
+          const dateA = new Date(a.time.seconds * 1000 + a.time.nanoseconds / 1000000);
+          const dateB = new Date(b.time.seconds * 1000 + b.time.nanoseconds / 1000000);
+          return dateB - dateA;
+        });
+      console.log("Sorted newsData:", sortedData);
+      setSortedNewsData(sortedData);
+    }
+  }, [newsData]);
 
   if (loading) {
     return (
@@ -23,27 +37,27 @@ function PoliticsPage() {
   }
 
   const handleNewsItemClick = (index) => {
-    setSelectedArticle(politicsNews[index]);
+    setSelectedArticle(sortedNewsData[index]);
   };
 
   return (
     <Layout>
       <div className="pageName">Politics</div>
-      {selectedArticle ?(
+      {selectedArticle ? (
         <Article
-        article={selectedArticle}
-        onClose={()=>setSelectedArticle(null)}
+          article={selectedArticle}
+          onClose={() => setSelectedArticle(null)}
         />
-      ):(
+      ) : (
         <div className="parent-hero">
-        {politicsNews.map((newsItem, index) => (
-          <Card
-          key={index}
-          news={newsItem}
-          onClick={()=>handleNewsItemClick(index)}
-          />
-        ))}
-      </div>
+          {sortedNewsData.map((newsItem, index) => (
+            <Card
+              key={index}
+              news={newsItem}
+              onClick={() => handleNewsItemClick(index)}
+            />
+          ))}
+        </div>
       )}
     </Layout>
   );
