@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 const Contact = ({ close }) => {
   const [buttonDisable, setButtonDisable] = useState(false);
-  const initial= {
+  const initial = {
     name: '',
     email: '',
     phone: '',
@@ -20,13 +20,13 @@ const Contact = ({ close }) => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Validate name
-    const isNameOnlyNumbers = /^\d+$/.test(formData.name);
-    if (isNameOnlyNumbers) {
-      toast.error("Name cannot be only numbers!");
+    const isNameValid = /^[a-zA-Z\s]+$/.test(formData.name);
+    if (!isNameValid) {
+      toast.error("Name can only contain letters and spaces!");
       return;
     }
 
@@ -37,13 +37,20 @@ const Contact = ({ close }) => {
       return;
     }
 
+    // Validate email
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailRegex.test(formData.email)) {
+      toast.error("Please enter a valid email address");
+      return;
+    }
+
     try {
       setButtonDisable(true);
       await addDoc(collection(db, "contactForm"), formData);
       toast.success("Contact details sent");
       close();
       setFormData(initial);
-    } catch(error) {
+    } catch (error) {
       toast.error(`${error.message}`);
     } finally {
       setButtonDisable(false);

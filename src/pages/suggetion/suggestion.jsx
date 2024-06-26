@@ -20,12 +20,24 @@ const Suggestion = ({ close }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Validate name
+    const isNameValid = /^[a-zA-Z\s]+$/.test(formData.name);
+    if (!isNameValid) {
+      toast.error("Name can only contain letters and spaces!");
+      return;
+    }
+
+    // Validate email
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailRegex.test(formData.email)) {
+      toast.error("Please enter a valid email address");
+      return;
+    }
+
     try {
       setButtonDisable(true);
-      const suggestionForm = await addDoc(
-        collection(db, "suggestionForm"),
-        formData
-      );
+      await addDoc(collection(db, "suggestionForm"), formData);
       toast.success("Suggestion sent");
       setFormData({
         name: "",
@@ -34,7 +46,7 @@ const Suggestion = ({ close }) => {
       });
       close();
     } catch (error) {
-      toast.error(`${error}`);
+      toast.error(`${error.message}`);
     } finally {
       setButtonDisable(false);
     }

@@ -6,7 +6,7 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import Layout from "../../component/layout/layout";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import "./haveNews.css"
+import "./haveNews.css";
 
 // Initialize Firebase storage
 const storage = getStorage(app);
@@ -46,8 +46,17 @@ function AlertNews() {
     return file && validImageTypes.includes(file.type);
   };
 
+  // Validate heading to only contain characters and spaces
+  const isValidHeading = (heading) => {
+    return /^[a-zA-Z\s]+$/.test(heading);
+  };
+
   // Handle posting news to Firestore
   const handlePostNews = async () => {
+    if (!isValidHeading(formData.heading)) {
+      toast.error("Heading can only contain letters and spaces!");
+      return;
+    }
     if (!formData.heading) {
       toast.error("Heading cannot be empty!");
       return;
@@ -81,14 +90,13 @@ function AlertNews() {
 
       // Add the updated data to Firestore
       const docRef = await addDoc(collection(db, "Alert"), updatedData);
-      // console.log("Document written with ID: ", docRef.id);
       toast.success("News Sent Successfully");
       setFormData(initialState);
       setFile(null);
       inputFileRef.current.value = "";
     } catch (error) {
       console.error("Error adding document: ", error);
-      toast.error(`${error}`);
+      toast.error(`${error.message}`);
     }
   };
 
@@ -105,6 +113,7 @@ function AlertNews() {
               onChange={handlechange}
               cols="4"
               rows="4"
+              required
             ></textarea>
           </div>
 
@@ -117,6 +126,7 @@ function AlertNews() {
               onChange={handlechange}
               cols="15"
               rows="15"
+              required
             ></textarea>
           </div>
           <div className="threeInput-group">
@@ -131,7 +141,9 @@ function AlertNews() {
                 id="category"
                 value={formData.category}
                 onChange={handlechange}
+                required
               >
+                <option value="">Select Category</option>
                 <option value="technology">Technology</option>
                 <option value="sport">Sport</option>
                 <option value="politics">Politics</option>
@@ -145,7 +157,9 @@ function AlertNews() {
                 id="isBreaking"
                 value={formData.isBreaking}
                 onChange={handlechange}
+                required
               >
+                <option value="">Select Option</option>
                 <option value="true">Yes</option>
                 <option value="false">No</option>
               </select>
@@ -159,6 +173,7 @@ function AlertNews() {
                 name="authorName"
                 value={formData.authorName}
                 onChange={handlechange}
+                required
               ></input>
             </div>
           </div>
