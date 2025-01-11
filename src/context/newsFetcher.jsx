@@ -17,12 +17,11 @@ function NewsFetcherProvider({ children }) {
       try {
         const newsCollectionRef = collection(db, "News");
         const querySnapshot = await getDocs(newsCollectionRef);
-
         const data = [];
         querySnapshot.forEach((doc) => {
           data.push({ id: doc.id, ...doc.data() });
         });
-
+        // console.log(data,"data_News")
         setNewsData(data);
       } catch (error) {
         console.error("Error fetching news data:", error);
