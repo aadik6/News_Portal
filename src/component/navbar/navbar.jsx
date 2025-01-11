@@ -17,12 +17,12 @@ function Navbar() {
           <div className="log">NewsWave</div>
           <div className="nav-items">
             <ul className={isOpen ? "nav-items-open" : "nav-items-closed"}>
-              <li><NavLink to="/News_Portal">Home</NavLink></li>
-              <li><NavLink to="/News_Portal/politics">Politics</NavLink></li>
-              <li><NavLink to="/News_Portal/sport">Sport</NavLink></li>
-              <li><NavLink to="/News_Portal/education">Education</NavLink></li>
-              <li><NavLink to="/News_Portal/technology">Technology</NavLink></li>
-              <li><NavLink to="/News_Portal/entertainment">Entertainment</NavLink></li>
+              <li><NavLink to="/">Home</NavLink></li>
+              <li><NavLink to="/politics">Politics</NavLink></li>
+              <li><NavLink to="/sport">Sport</NavLink></li>
+              <li><NavLink to="/education">Education</NavLink></li>
+              <li><NavLink to="/technology">Technology</NavLink></li>
+              <li><NavLink to="/entertainment">Entertainment</NavLink></li>
             </ul>
           </div>
           <div className="hamburger" onClick={toggleMenu}>

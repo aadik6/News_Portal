@@ -8,7 +8,8 @@ function Card({ news, onClick }) {
         background: `url(${news.image})`,
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
-        backgroundPosition: "center"
+        backgroundPosition: "center",
+        cursor:"pointer",
       }}
       onClick={onClick}
     >

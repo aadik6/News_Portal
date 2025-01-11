@@ -8,26 +8,10 @@ import Article from "../../component/article/article";
 function Technology() {
   const { newsData, loading } = useNewsContext();
   const [selectedArticle, setSelectedArticle] = useState(null);
-  const [sortedNewsData, setSortedNewsData] = useState([]);
 
   // Filter news where category is 'technology'
-  useEffect(() => {
-    const technologyNews = newsData.filter(
-      (newsItem) => newsItem.category === "technology"
-    );
-    if (technologyNews.length > 0) {
-      console.log("Original newsData:", technologyNews);
-      const sortedData = [...technologyNews]
-        .filter(item => item.time && item.time.seconds && item.time.nanoseconds)
-        .sort((a, b) => {
-          const dateA = new Date(a.time.seconds * 1000 + a.time.nanoseconds / 1000000);
-          const dateB = new Date(b.time.seconds * 1000 + b.time.nanoseconds / 1000000);
-          return dateB - dateA;
-        });
-      console.log("Sorted newsData:", sortedData);
-      setSortedNewsData(sortedData);
-    }
-  }, [newsData]);
+  const technologyNews = newsData.filter((newsItem) => newsItem.category === "technology"
+  );
   if (loading) {
     return (
       <Layout>
@@ -37,7 +21,7 @@ function Technology() {
   }
 
   const handleNewsItemClick = (index) => {
-    setSelectedArticle(sortedNewsData[index]);
+    setSelectedArticle(technologyNews[index]);
   };
 
   return (
@@ -50,7 +34,7 @@ function Technology() {
         />
       ) : (
         <div className="parent-hero">
-          {sortedNewsData.map((newsItem, index) => (
+          {technologyNews.map((newsItem, index) => (
             <Card
               key={index}
               news={newsItem}

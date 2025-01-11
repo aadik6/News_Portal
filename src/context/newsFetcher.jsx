@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { db } from "../firebase";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, query, orderBy } from "firebase/firestore";
 
 // Create a context
 const NewsContext = createContext();
@@ -16,11 +16,18 @@ function NewsFetcherProvider({ children }) {
     const fetchData = async () => {
       try {
         const newsCollectionRef = collection(db, "News");
-        const querySnapshot = await getDocs(newsCollectionRef);
+        const q = query(newsCollectionRef, orderBy("time", "desc"))
+
+        const sortedDataaa = await getDocs(q)
         const data = [];
-        querySnapshot.forEach((doc) => {
+        sortedDataaa.forEach((doc) => {
           data.push({ id: doc.id, ...doc.data() });
+          // console.log(doc.data())
         });
+        // const querySnapshot = await getDocs(newsCollectionRef);
+        // querySnapshot.forEach((doc) => {
+        //   data.push({ id: doc.id, ...doc.data() });
+        // });
         // console.log(data,"data_News")
         setNewsData(data);
       } catch (error) {

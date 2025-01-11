@@ -8,27 +8,12 @@ import Card from "../../component/card/newsCard";
 
 function Sport() {
   const { newsData, loading } = useNewsContext();
-  const [sortedNewsData, setSortedNewsData] = useState([]);
   const [selectedArticle, setSelectedArticle] = useState(null);
 
  
-  useEffect(() => {
-    const sportNews = newsData.filter(
-      (newsItem) => newsItem.category === "sport"
-    );
-    if (sportNews.length > 0) {
-      console.log("Original newsData:", sportNews);
-      const sortedData = [...sportNews]
-        .filter(item => item.time && item.time.seconds && item.time.nanoseconds)
-        .sort((a, b) => {
-          const dateA = new Date(a.time.seconds * 1000 + a.time.nanoseconds / 1000000);
-          const dateB = new Date(b.time.seconds * 1000 + b.time.nanoseconds / 1000000);
-          return dateB - dateA;
-        });
-      console.log("Sorted newsData:", sortedData);
-      setSortedNewsData(sortedData);
-    }
-  }, [newsData]);
+  const sportNews = newsData.filter((newsItem) => newsItem.category === "sport"
+  );
+
 
 
   if (loading) {
@@ -40,7 +25,7 @@ function Sport() {
   }
 
   const handleNewsItemClick = (index) => {
-    setSelectedArticle(sortedNewsData[index]);
+    setSelectedArticle(sportNews[index]);
   };
 
   return (
@@ -53,7 +38,7 @@ function Sport() {
         />
       ) : (
         <div className="parent-hero">
-          {sortedNewsData.map((newsItem, index) => (
+          {sportNews.map((newsItem, index) => (
             <Card
               key={index}
               news={newsItem}

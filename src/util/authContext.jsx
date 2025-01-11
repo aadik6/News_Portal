@@ -14,7 +14,7 @@ export const AuthProvider = ({ children }) => {
             const result= await signInWithEmailAndPassword(auth, email, password);
             toast.success("User logged in")
             // console.log(auth.currentUser.emailVerified, "op");
-            navigate('/News_Portal/dashboard');
+            navigate('/dashboard');
             setSession(result)
         } catch (error) {
             // console.error(error.code, "errorCode");

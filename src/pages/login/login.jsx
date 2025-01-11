@@ -45,7 +45,7 @@ function LoginPage() {
                         />
                         <span>show_password</span>
                     </label>
-                    <Link to="/News_Portal/reset">Forgot?</Link>
+                    <Link to="/reset">Forgot?</Link>
                 </div>
                 <button onClick={loginUser}>Login</button>
             </div>

@@ -30,27 +30,27 @@ function App() {
             <NewsFetcherProvider>
             <AuthProvider>
                 <Routes>
-                    <Route path="/News_Portal/admin" element={<LoginPage />} />
-                    <Route path="/News_Portal/haveNews" element={<AlertNews/>}/>                   
-                    <Route path="/News_Portal" element={<HomePage />} />
-                    <Route path="/News_Portal/technology" element={<Technology/>}/>                  
-                    <Route path="/News_Portal/entertainment" element={<EntertainmentPage />} />
-                    <Route path="/News_Portal/sport" element={<Sport />} />
-                    <Route path="/News_Portal/education" element={<Education/>}/>
-                    <Route path="/News_Portal/politics" element={<PoliticsPage/>}/> 
+                    <Route path="/admin" element={<LoginPage />} />
+                    <Route path="/haveNews" element={<AlertNews/>}/>                   
+                    <Route path="/" element={<HomePage />} />
+                    <Route path="/technology" element={<Technology/>}/>                  
+                    <Route path="/entertainment" element={<EntertainmentPage />} />
+                    <Route path="/sport" element={<Sport />} />
+                    <Route path="/education" element={<Education/>}/>
+                    <Route path="/politics" element={<PoliticsPage/>}/> 
                     <Route path="" element={<ProtectedRoute />}>
-                        <Route path="/News_Portal/dashboard" element={<Dashboard/>}/>
-                        <Route path="/News_Portal/addNews" element={<AddNews />} />
-                        <Route path="/News_Portal/addUser" element={<AddUser />} />
-                        <Route path="/News_Portal/traffic" element={<Traffic/>}/>
-                        <Route path="/News_Portal/adminNews" element={<News/>}/>
-                        <Route path="/News_Portal/adminHaveNews" element={<AdminHaveNews/>}/>
-                        <Route path="/News_Portal/adminContact" element={<AdminContact/>}/>
-                        <Route path="/News_Portal/adminSuggestion" element={<AdminSuggestion/>}/>
+                        <Route path="/dashboard" element={<Dashboard/>}/>
+                        <Route path="/addNews" element={<AddNews />} />
+                        <Route path="/addUser" element={<AddUser />} />
+                        <Route path="/traffic" element={<Traffic/>}/>
+                        <Route path="/adminNews" element={<News/>}/>
+                        <Route path="/adminHaveNews" element={<AdminHaveNews/>}/>
+                        <Route path="/adminContact" element={<AdminContact/>}/>
+                        <Route path="/adminSuggestion" element={<AdminSuggestion/>}/>
                     </Route>
                     <Route path="/*" element={<NoPage/>}/>
-                    <Route path="/News_Portal/suggestion" element={<Suggestion/>}/>
-                    <Route path="/News_Portal/reset" element={<ResetPassword/>}/>
+                    <Route path="/suggestion" element={<Suggestion/>}/>
+                    <Route path="/reset" element={<ResetPassword/>}/>
                     
                 </Routes>
             </AuthProvider>

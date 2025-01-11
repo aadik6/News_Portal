@@ -30,7 +30,7 @@ function AdminSidebarVertical() {
   function logout() {
     localStorage.clear();
     toast.success("You are logged out");
-    navigate("/News_Portal");
+    navigate("/");
   }
 
   return (
@@ -38,19 +38,19 @@ function AdminSidebarVertical() {
       <div className="adminSidebar">
         <ul>
           <li>
-            <NavLink to="/News_Portal/dashboard">
+            <NavLink to="/dashboard">
               <FontAwesomeIcon icon={faHouseUser} />
               <h4>Dashboard</h4>
             </NavLink>
           </li>
           <li>
-            <NavLink to="/News_Portal/adminNews">
+            <NavLink to="/adminNews">
               <FontAwesomeIcon icon={faNewspaper} />
               <h4>News</h4>
             </NavLink>
           </li>
           <li>
-            <NavLink to="/News_Portal/addNews">
+            <NavLink to="/addNews">
               <FontAwesomeIcon icon={faPenToSquare} />
               <h4>Add News</h4>
             </NavLink>
@@ -64,25 +64,25 @@ function AdminSidebarVertical() {
               {showAdministratorMenu && (
                 <ul className="nested">
                   <li>
-                    <NavLink to="/News_Portal/addUser">
+                    <NavLink to="/addUser">
                       <FontAwesomeIcon icon={faUserPlus} />
                       <h4>Add User</h4>
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink to="/News_Portal/adminHaveNews">
+                    <NavLink to="/adminHaveNews">
                       <FontAwesomeIcon icon={faEnvelopesBulk} />
                       <h4>Post Request</h4>
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink to="/News_Portal/adminContact">
+                    <NavLink to="/adminContact">
                       <FontAwesomeIcon icon={faAddressBook} />
                       <h4>Contact</h4>
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink to="/News_Portal/adminSuggestion">
+                    <NavLink to="/adminSuggestion">
                       <FontAwesomeIcon icon={faMessage} />
                       <h4>Sugestions</h4>
                     </NavLink>

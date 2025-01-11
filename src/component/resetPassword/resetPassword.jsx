@@ -39,7 +39,7 @@ function ResetPassword() {
                 {resetSuccess &&
                     <>
                         <p>Password reset email sent successfully!</p>
-                        <Link to="/News_Portal/admin" className='resetToLogin'>Login</Link>
+                        <Link to="/admin" className='resetToLogin'>Login</Link>
                     </>}
             </div>
         </div>
