@@ -1,7 +1,7 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useContext, useState  } from "react";
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from "../firebase";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const AuthContext = createContext();

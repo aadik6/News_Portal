@@ -1,63 +1,50 @@
-import React, { useEffect } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import HomePage from "./pages/homePage/homePage";
-import EntertainmentPage from "./pages/newsCategory/entertainment";
-import Sport from "./pages/newsCategory/sport";
-import AddNews from "./pages/addNews/addNews";
-import ProtectedRoute from './util/protectedRoute'
-import AddUser from "./pages/addUser/addUser";
-import LoginPage from "./pages/login/login";
-import { AuthProvider } from "./util/authContext";
-import Dashboard from "./pages/dashboard/dashboard";
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import NewsFetcherProvider from "./context/newsFetcher";
-import AlertNews from "./pages/haveNews/haveNews";
-import NoPage from "./pages/noPage/noPage";
-import Traffic from "./pages/traffic/traffic";
-import Suggestion from "./pages/suggetion/suggestion"
-import News from "./pages/news/news";
-import AdminHaveNews from "./pages/adminHaveNews/adminHaveNews";
-import Technology from "./pages/newsCategory/technology";
-import Education from "./pages/newsCategory/education";
-import PoliticsPage from "./pages/newsCategory/politics";
-import AdminContact from "./pages/adminContact/adminContact";
-import AdminSuggestion from "./pages/adminSuggestion/adminSuggestion";
-import ResetPassword from "./component/resetPassword/resetPassword";
-import "./App.css"
-import useNews from "./store/useNewsStore";
+import HomePage from "./pages/homePage";
+import NewsCategory from "./pages/categoryPage";
+import HaveNews from "./pages/haveNews";
+import { AuthProvider } from "./util/authContext";
+import ProtectedRoute from "./util/protectedRoute";
+import AddNews from "./pages/addNews";
+import ResetPassword from "./pages/resetPassword";
+import LoginPage from "./pages/login";
+import AdminContact from "./pages/adminContact";
+import AdminSuggestion from "./pages/adminSuggestion";
+import AdminHaveNews from "./pages/adminHaveNews";
+import News from "./pages/news";
+import Dashboard from "./pages/dashboard";
+import "./App.css";
+import NoPage from "./pages/noPage";
+import AddUser from "./pages/addUser";
 
-function App() {;
-    return (
-        <Router>
-            <NewsFetcherProvider>
-            <AuthProvider>
-                <Routes>
-                    <Route path="/admin" element={<LoginPage />} />
-                    <Route path="/haveNews" element={<AlertNews/>}/>                   
-                    <Route path="/" element={<HomePage />} />
-                    <Route path="/technology" element={<Technology/>}/>                  
-                    <Route path="/entertainment" element={<EntertainmentPage />} />
-                    <Route path="/sport" element={<Sport />} />
-                    <Route path="/education" element={<Education/>}/>
-                    <Route path="/politics" element={<PoliticsPage/>}/> 
-                    <Route path="" element={<ProtectedRoute />}>
-                        <Route path="/dashboard" element={<Dashboard/>}/>
-                        <Route path="/addNews" element={<AddNews />} />
-                        <Route path="/addUser" element={<AddUser />} />
-                        <Route path="/traffic" element={<Traffic/>}/>
-                        <Route path="/adminNews" element={<News/>}/>
-                        <Route path="/adminHaveNews" element={<AdminHaveNews/>}/>
-                        <Route path="/adminContact" element={<AdminContact/>}/>
-                        <Route path="/adminSuggestion" element={<AdminSuggestion/>}/>
-                    </Route>
-                    <Route path="/*" element={<NoPage/>}/>
-                    <Route path="/suggestion" element={<Suggestion/>}/>
-                    <Route path="/reset" element={<ResetPassword/>}/>
-                    
-                </Routes>
-            </AuthProvider>
-            </NewsFetcherProvider>
-        </Router>
-    );
-}
+const App = () => {
+  return (
+    <BrowserRouter>
+      <NewsFetcherProvider>
+        <AuthProvider>
+          <Routes>
+            <Route path="/admin" element={<LoginPage />} />
+            <Route path="/" element={<HomePage />} />
+            <Route path="category/:categoryName" element={<NewsCategory />} />
+            <Route path="/haveNews" element={<HaveNews />} />
+            <Route path="" element={<ProtectedRoute />}>
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/adminnews" element={<News />} />
+              <Route path="/addnews" element={<AddNews />} />
+              <Route path="/adduser" element={<AddUser />} />
+              
+              <Route path="/adminHaveNews" element={<AdminHaveNews />} />
+              <Route path="/adminContact" element={<AdminContact />} />
+              <Route path="/adminSuggestion" element={<AdminSuggestion />} />
+            </Route>
+            <Route path="/reset" element={<ResetPassword />} />
+            <Route path="/*" element={<NoPage/>}/>
+          </Routes>
+        </AuthProvider>
+      </NewsFetcherProvider>
+    </BrowserRouter>
+  );
+};
 
 export default App;
