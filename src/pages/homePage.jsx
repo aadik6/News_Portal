@@ -3,7 +3,7 @@ import "./homePage.css";
 import { useNewsContext } from "../context/newsFetcher";
 import Article from "../components/article/article";
 import Card from "../components/card/newsCard";
-import Layout from "../components/layout/Layout";
+import Layout from "../components/layout/layout";
 import Loader from "../components/loader/loader";
 
 
