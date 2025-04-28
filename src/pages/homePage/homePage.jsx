@@ -7,9 +7,10 @@ import Article from "../../component/article/article";
 import FirebaseErrorCard from "../../component/card/firebaseErrorCard";
 import 'react-toastify/dist/ReactToastify.css';
 import "../homePage/homePage.css";
+import useNews from "../../store/useNewsStore";
 
 function HomePage() {
-  const { newsData, loading } = useNewsContext();
+  const { newsData, loading } = useNews();
   const [selectedArticle, setSelectedArticle] = useState(null);
 
   if (loading) {

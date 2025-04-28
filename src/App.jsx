@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import HomePage from "./pages/homePage/homePage";
 import EntertainmentPage from "./pages/newsCategory/entertainment";
@@ -23,11 +23,16 @@ import AdminContact from "./pages/adminContact/adminContact";
 import AdminSuggestion from "./pages/adminSuggestion/adminSuggestion";
 import ResetPassword from "./component/resetPassword/resetPassword";
 import "./App.css"
+import useNews from "./store/useNewsStore";
 
 function App() {
+    const {loading,fetchNews} = useNews();
+    useEffect(()=>{
+        fetchNews();
+    },[]);
     return (
         <Router>
-            <NewsFetcherProvider>
+            {/* <NewsFetcherProvider> */}
             <AuthProvider>
                 <Routes>
                     <Route path="/admin" element={<LoginPage />} />
@@ -54,7 +59,7 @@ function App() {
                     
                 </Routes>
             </AuthProvider>
-            </NewsFetcherProvider>
+            {/* </NewsFetcherProvider> */}
         </Router>
     );
 }
