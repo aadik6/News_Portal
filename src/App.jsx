@@ -25,14 +25,10 @@ import ResetPassword from "./component/resetPassword/resetPassword";
 import "./App.css"
 import useNews from "./store/useNewsStore";
 
-function App() {
-    const {loading,fetchNews} = useNews();
-    useEffect(()=>{
-        fetchNews();
-    },[]);
+function App() {;
     return (
         <Router>
-            {/* <NewsFetcherProvider> */}
+            <NewsFetcherProvider>
             <AuthProvider>
                 <Routes>
                     <Route path="/admin" element={<LoginPage />} />
@@ -59,7 +55,7 @@ function App() {
                     
                 </Routes>
             </AuthProvider>
-            {/* </NewsFetcherProvider> */}
+            </NewsFetcherProvider>
         </Router>
     );
 }

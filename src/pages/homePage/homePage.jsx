@@ -10,7 +10,7 @@ import "../homePage/homePage.css";
 import useNews from "../../store/useNewsStore";
 
 function HomePage() {
-  const { newsData, loading } = useNews();
+  const { newsData, loading } = useNewsContext();
   const [selectedArticle, setSelectedArticle] = useState(null);
 
   if (loading) {

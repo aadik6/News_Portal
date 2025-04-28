@@ -1,11 +1,9 @@
 import React from "react";
 import { useNewsContext } from "../../context/newsFetcher";
 import "./breaking.css";
-import Loader from "../loader/loader";
-import useNews from "../../store/useNewsStore";
 
 function Breaking() {
-  const { newsData, loading } = useNews();
+  const { newsData, loading } = useNewsContext();
 
   // Filter breaking news based on a specific criteria, for example, isBreaking property
   // if (loading) {
