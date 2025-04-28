@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { collection, addDoc } from "firebase/firestore";
 import { db,app } from "../firebase";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import Layout from '../components/layout/Layout';
+import Layout from '../components/layout/layout';
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import "./addNews.css";
